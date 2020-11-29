@@ -4,6 +4,7 @@ const initialState = {
   cartProducts: [],
   quantity: 1,
   loading: false,
+  isModalShown: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -25,6 +26,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         loading: false,
       };
+
     //Get Cart
     case actionTypes.GET_CART_PRODUCTS_START:
       return {
@@ -43,6 +45,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         loading: false,
       };
+
     //Clear the Cart
     case actionTypes.CLEAR_CART_START:
       return {
@@ -60,6 +63,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         loading: true,
       };
+
     //Change Quantity
     case actionTypes.INCREASE_QUANTITY:
       let incQuantity = state.quantity;
@@ -80,6 +84,17 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         quantity: decQuantity,
+      };
+    //Modal controls
+    case actionTypes.SHOW_PURCHASE_MODAL:
+      return {
+        ...state,
+        isModalShown: true,
+      };
+    case actionTypes.HIDE_PURCHASE_MODAL:
+      return {
+        ...state,
+        isModalShown: false,
       };
     //Disable input errors
     case actionTypes.DISABLE_ERRORS:

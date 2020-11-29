@@ -28,10 +28,9 @@ class Cart extends Component {
       cart = (
         <div>
           <div className={classes.Controls}>
-            <button onClick={this.props.clearCart}>Delete</button>
             <button onClick={this.props.getCartProducts}>Refresh</button>
             <button onClick={() => this.props.history.push("/")}>
-              Back To Shop
+              Back to Shop
             </button>
           </div>
           <Table striped bordered hover>
@@ -88,12 +87,23 @@ class Cart extends Component {
                   All Together
                 </Card.Title>
                 <Card.Title style={{ fontSize: "1em" }}>
-                  $ {(0.2 * total).toFixed() + total}
+                  $ {0.2 * total + total}
                 </Card.Title>
               </div>
 
-              <Button style={{ width: "100%" }} variant="primary">
+              <Button
+                onClick={this.props.showModalHandler}
+                style={{ width: "100%" }}
+                variant="primary"
+              >
                 Order
+              </Button>
+              <Button
+                onClick={this.props.clearCart}
+                style={{ width: "100%", marginTop: "10px" }}
+                variant="primary"
+              >
+                Delete
               </Button>
             </Card.Body>
           </Card>
@@ -138,6 +148,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getCartProducts: () => dispatch(cartActions.getCartProducts()),
     clearCart: () => dispatch(cartActions.clearCart()),
+    showModalHandler: () => dispatch(cartActions.showPurchaseModal()),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Cart));

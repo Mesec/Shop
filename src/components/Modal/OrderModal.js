@@ -1,12 +1,15 @@
 import React from "react";
+import { connect } from "react-redux";
+import * as cartActions from "../../store/actions/cart";
+
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-const orderModal = () => {
+const orderModal = (props) => {
   return (
-    <Modal show={false}>
-      <Modal.Header style={{ marginBottom: "20px" }}>
+    <Modal show={props.isModalShown} onHide={props.hideModalHandler}>
+      <Modal.Header closeButton style={{ marginBottom: "20px" }}>
         <Modal.Title>Order Now</Modal.Title>
       </Modal.Header>
 
@@ -32,10 +35,25 @@ const orderModal = () => {
       </Modal.Body>
 
       <Modal.Footer style={{ position: "relative", bottom: "10px" }}>
-        <Button variant="primary">Save changes</Button>
+        <Button variant="primary">Purchase</Button>
+        <Button onClick={props.hideModalHandler} variant="primary">
+          Cancel
+        </Button>
       </Modal.Footer>
     </Modal>
   );
 };
 
-export default orderModal;
+const mapStateToProps = (state) => {
+  return {
+    isModalShown: state.cart.isModalShown,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    hideModalHandler: () => dispatch(cartActions.hidePurchaseModal()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(orderModal);

@@ -14,7 +14,7 @@ exports.createUser = (req, res, next) => {
   if (!errors.isEmpty())
     return res.status(402).json({ errors: errors, oldData: req.body });
 
-  User.findOne({ email: email }).then(user => {
+  User.findOne({ email: email }).then((user) => {
     if (user) {
       return res.status(403).json({
         errors: {
@@ -49,7 +49,7 @@ exports.createUser = (req, res, next) => {
           },
         });
       }
-      return bcrypt.hash(password, 12).then(hashedPassword => {
+      return bcrypt.hash(password, 12).then((hashedPassword) => {
         const user = new User({
           fullName: fullName,
           email: email,
@@ -57,10 +57,10 @@ exports.createUser = (req, res, next) => {
         });
         user
           .save()
-          .then(response => {
+          .then((response) => {
             res.status(200).json(response);
           })
-          .catch(err => {
+          .catch((err) => {
             console.log(err);
           });
       });
@@ -78,7 +78,7 @@ exports.loginUser = (req, res, next) => {
     return res.status(402).json({ errors: errors, oldData: req.body });
 
   User.findOne({ email: email })
-    .then(user => {
+    .then((user) => {
       if (!user) {
         res.status(401).json({
           errors: {
@@ -93,7 +93,7 @@ exports.loginUser = (req, res, next) => {
           },
         });
       } else {
-        bcrypt.compare(password, user.password).then(doMatch => {
+        bcrypt.compare(password, user.password).then((doMatch) => {
           if (!doMatch) {
             res.status(401).json({
               errors: {
@@ -113,15 +113,14 @@ exports.loginUser = (req, res, next) => {
                 email: user.email,
                 userId: user._id.toString(),
               },
-              "superpersusecretnajtajnijistringikadaever",
-              { expiresIn: "1h" }
+              "superpersusecretnajtajnijistringikadaever"
             );
             res.status(200).json({ token: token });
           }
         });
       }
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
     });
 };

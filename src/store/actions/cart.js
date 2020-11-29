@@ -2,7 +2,7 @@ import * as actionTypes from "./actionsTypes";
 import * as productActions from "./products";
 import axios from "axios";
 
-//  Add to cart actions
+//Add to cart actions
 export const addToCartStart = () => {
   return {
     type: actionTypes.ADD_TO_CART_START,
@@ -38,7 +38,7 @@ export const addToCart = (cartData) => {
   };
 };
 
-// Get cart products from db
+//Get cart products from db
 export const getCartProductsStart = () => {
   return {
     type: actionTypes.GET_CART_PRODUCTS_START,
