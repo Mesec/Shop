@@ -1,0 +1,41 @@
+/* .AddToCartActions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+} */
+.ID {
+  font-size: 0.8em;
+}
+.AddToCartActions h4 {
+  margin-bottom: 20px;
+}
+.SelectAmount {
+  display: flex;
+}
+.SelectAmount span {
+  width: 50px;
+  font-size: 1em;
+  text-align: center;
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+.Buttons {
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+}
+.Buttons button {
+  width: 30px;
+  height: 20px;
+  padding: 0;
+  font-size: 0.6em;
+  outline: none;
+  border: 1px solid #ccc;
+}
