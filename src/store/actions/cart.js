@@ -116,3 +116,15 @@ export const decreaseQuantity = () => {
     type: actionTypes.DECREASE_QUANTITY,
   };
 };
+
+//Purchase Modal actions
+export const showPurchaseModal = () => {
+  return {
+    type: actionTypes.SHOW_PURCHASE_MODAL,
+  };
+};
+export const hidePurchaseModal = () => {
+  return {
+    type: actionTypes.HIDE_PURCHASE_MODAL,
+  };
+};
