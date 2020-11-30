@@ -14,9 +14,9 @@ class Products extends Component {
     this.setState({ path: this.props.history.location.pathname });
     this.props.getProductsHandler();
   }
-  setQueryParamsForProductDetail = movieId => {
+  setQueryParamsForProductDetail = (movieId) => {
     this.props.history.push({
-      pathname: "/movie",
+      pathname: "/product",
       search: "?" + movieId,
     });
   };
@@ -49,14 +49,14 @@ class Products extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     products: state.products.products,
     loading: state.products.loading,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     getProductsHandler: () => dispatch(actions.getProducts()),
   };

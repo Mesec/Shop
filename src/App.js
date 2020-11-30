@@ -53,7 +53,7 @@ class App extends Component {
         >
           <Switch>
             <Route path="/" exact component={() => <Products />} />
-            <Route path="/movie" exact component={() => <ProductDetail />} />
+            <Route path="/product" exact component={() => <ProductDetail />} />
             <Route
               path="/admin/products"
               exact
