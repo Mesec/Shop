@@ -19,6 +19,7 @@ export const addToCartFailed = () => {
   };
 };
 export const addToCart = (cartData) => {
+  console.log(cartData);
   return (dispatch) => {
     dispatch(addToCartStart());
     axios
@@ -63,6 +64,7 @@ export const getCartProducts = () => {
         Authorization: "Bearer " + localStorage.getItem("token"),
       })
       .then((response) => {
+        console.log(response);
         dispatch(getCartProductsSuccess(response.data));
       })
       .catch((error) => {

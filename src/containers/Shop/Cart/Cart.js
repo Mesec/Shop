@@ -44,7 +44,6 @@ class Cart extends Component {
             </thead>
             <tbody>
               {this.props.products.map((product) => {
-                total += product.quantity * product.productId.price;
                 return (
                   <tr key={product._id}>
                     <td>
@@ -69,11 +68,13 @@ class Cart extends Component {
             <Card.Body>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <p style={{ fontSize: "0.9em" }}>Total:</p>
-                <p style={{ fontSize: "0.9em" }}>${total}</p>
+                <p style={{ fontSize: "0.9em" }}>${this.props.total}</p>
               </div>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <p style={{ fontSize: "0.9em" }}>PDV:</p>
-                <p style={{ fontSize: "0.9em" }}>${0.2 * total}</p>
+                <p style={{ fontSize: "0.9em" }}>Vat:</p>
+                <p style={{ fontSize: "0.9em" }}>
+                  ${this.props.pdv.toFixed(2)}
+                </p>
               </div>
               <hr />
               <div
@@ -87,7 +88,7 @@ class Cart extends Component {
                   All Together
                 </Card.Title>
                 <Card.Title style={{ fontSize: "1em" }}>
-                  $ {0.2 * total + total}
+                  $ {this.props.totalPrice.toFixed(2)}
                 </Card.Title>
               </div>
 
@@ -142,6 +143,9 @@ const mapStateToProps = (state) => {
   return {
     products: state.cart.cartProducts,
     loading: state.cart.loading,
+    total: state.cart.total,
+    pdv: state.cart.pdv,
+    totalPrice: state.cart.totalPrice,
   };
 };
 const mapDispatchToProps = (dispatch) => {

@@ -13,7 +13,8 @@ import ProductDetail from "./containers/Shop/ProductDetail/ProductDetail";
 import AdminProducts from "./containers/Admin/AdminProducts/AdminProducts";
 import Login from "./containers/Auth/Login/Login";
 import Register from "./containers/Auth/Register/Register";
-import Cart from './containers/Shop/Cart/Cart'
+import Cart from "./containers/Shop/Cart/Cart";
+import Orders from "./containers/Shop/Orders/Orders";
 
 class App extends Component {
   state = {
@@ -22,16 +23,16 @@ class App extends Component {
     loading: false,
   };
 
-  loginUserHandler = userData => {
+  loginUserHandler = (userData) => {
     this.setState({ loading: true });
     axios
       .post("http://localhost:5000/auth/login", userData)
-      .then(response => {
+      .then((response) => {
         localStorage.setItem("token", response.data.token);
         this.setState({ isAuth: true, loading: false });
         this.props.history.replace("/");
       })
-      .catch(error => {
+      .catch((error) => {
         this.setState({
           errors: error.response.data.errors.errors,
           loading: false,
@@ -75,13 +76,14 @@ class App extends Component {
             />
             <Route path="/register" component={() => <Register />} />
             <Route path="/cart" component={() => <Cart />} />
+            <Route path="/orders" component={() => <Orders />} />
           </Switch>
         </Layout>
       </Container>
     );
   }
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     isAuth: state.auth.isAuthenticated,
   };

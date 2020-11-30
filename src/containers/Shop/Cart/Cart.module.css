@@ -8,6 +8,7 @@
   background-color: transparent;
   color: white;
   border: none;
+  font-size: 0.9em;
 }
 .Controls button:hover {
   text-decoration: underline;

@@ -5,6 +5,9 @@ const initialState = {
   quantity: 1,
   loading: false,
   isModalShown: false,
+  total: 0,
+  totalPrice: 0,
+  pdv: 0,
 };
 
 const reducer = (state = initialState, action) => {
@@ -34,11 +37,20 @@ const reducer = (state = initialState, action) => {
         loading: true,
       };
     case actionTypes.GET_CART_PRODUCTS_SUCCESS:
-      console.log(state.cartProducts);
+      let total = 0;
+      action.cartProducts.forEach((product) => {
+        total += product.quantity * product.productId.price;
+      });
+      let pdv = 0.2 * total;
+      let totalPrice = total + pdv;
+      console.log(totalPrice);
       return {
         ...state,
         cartProducts: action.cartProducts,
         loading: false,
+        total: total,
+        pdv: pdv,
+        totalPrice: totalPrice,
       };
     case actionTypes.GET_CART_PRODUCTS_FAILED:
       return {

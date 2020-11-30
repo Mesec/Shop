@@ -16,8 +16,7 @@ exports.getCartProducts = (req, res, next) => {
     "superpersusecretnajtajnijistringikadaever"
   );
   const userId = decodedToken.userId;
-  const ids = [];
-  const products = [];
+
   User.findById(userId)
     .populate("cart.items.productId")
     .then((user) => {
