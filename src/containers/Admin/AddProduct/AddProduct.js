@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import * as prodActions from "../../../store/actions/products";
 import * as authActions from "../../../store/actions/auth";
 import { withRouter } from "react-router-dom";
+import classes from "./AddProduct.module.css";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -32,7 +33,7 @@ class AddProduct extends Component {
     this.setState({ productData: productData });
   }
 
-  addProductHandler = event => {
+  addProductHandler = (event) => {
     event.preventDefault();
     this.props.addProductHandler({ ...this.state.productData });
     // this.props.history.replace("/admin/products");
@@ -40,9 +41,9 @@ class AddProduct extends Component {
     this.setState({ productData: productData });
   };
 
-  onChangeHandler = event => {
+  onChangeHandler = (event) => {
     const productDataCopy = { ...this.state.productData };
-    Object.keys(productDataCopy).forEach(item => {
+    Object.keys(productDataCopy).forEach((item) => {
       if (item === event.target.name) {
         productDataCopy[item] = event.target.value;
       }
@@ -52,7 +53,7 @@ class AddProduct extends Component {
   render() {
     let errorsObject = {};
     if (this.props.errors) {
-      this.props.errors.forEach(error => {
+      this.props.errors.forEach((error) => {
         errorsObject[error.param] = error.msg;
       });
     } else {
@@ -61,14 +62,14 @@ class AddProduct extends Component {
     let form = (
       <Form style={{ width: "100%" }}>
         <Form.Group>
-          <Form.Label>Product Name</Form.Label>
+          <Form.Label className={classes.Label}>Product Name</Form.Label>
           <Form.Control
             name="name"
             type="text"
             placeholder="Product Name"
             value={this.state.productData.name}
             size="sm"
-            onChange={event => {
+            onChange={(event) => {
               this.onChangeHandler(event);
             }}
           />
@@ -84,14 +85,14 @@ class AddProduct extends Component {
           </p>
         </Form.Group>
         <Form.Group>
-          <Form.Label>Product Type</Form.Label>
+          <Form.Label className={classes.Label}>Product Type</Form.Label>
           <Form.Control
             name="type"
             type="text"
             placeholder="Product Type"
             value={this.state.productData.type}
             size="sm"
-            onChange={event => {
+            onChange={(event) => {
               this.onChangeHandler(event);
             }}
           />
@@ -107,14 +108,14 @@ class AddProduct extends Component {
           </p>
         </Form.Group>
         <Form.Group>
-          <Form.Label>Product Image</Form.Label>
+          <Form.Label className={classes.Label}>Product Image</Form.Label>
           <Form.Control
             name="image"
             type="text"
             placeholder="Product Image"
             value={this.state.productData.image}
             size="sm"
-            onChange={event => {
+            onChange={(event) => {
               this.onChangeHandler(event);
             }}
           />
@@ -130,14 +131,14 @@ class AddProduct extends Component {
           </p>
         </Form.Group>
         <Form.Group>
-          <Form.Label>Amout</Form.Label>
+          <Form.Label className={classes.Label}>Amout</Form.Label>
           <Form.Control
             name="amount"
             type="number"
             placeholder="Amount"
             value={this.state.productData.amount}
             size="sm"
-            onChange={event => {
+            onChange={(event) => {
               this.onChangeHandler(event);
             }}
           />
@@ -153,14 +154,14 @@ class AddProduct extends Component {
           </p>
         </Form.Group>
         <Form.Group>
-          <Form.Label>Price</Form.Label>
+          <Form.Label className={classes.Label}>Price</Form.Label>
           <Form.Control
             name="price"
             type="number"
             placeholder="Price"
             value={this.state.productData.price}
             size="sm"
-            onChange={event => {
+            onChange={(event) => {
               this.onChangeHandler(event);
             }}
           />
@@ -176,7 +177,7 @@ class AddProduct extends Component {
           </p>
         </Form.Group>
         <Form.Group>
-          <Form.Label>Description</Form.Label>
+          <Form.Label className={classes.Label}>Description</Form.Label>
           <Form.Control
             name="description"
             as="textarea"
@@ -184,7 +185,7 @@ class AddProduct extends Component {
             placeholder="Description"
             size="sm"
             value={this.state.productData.description}
-            onChange={event => {
+            onChange={(event) => {
               this.onChangeHandler(event);
             }}
           />
@@ -202,7 +203,7 @@ class AddProduct extends Component {
         <Button
           variant="primary"
           type="submit"
-          onClick={event => this.addProductHandler(event)}
+          onClick={(event) => this.addProductHandler(event)}
         >
           Submit
         </Button>
@@ -230,7 +231,7 @@ class AddProduct extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     oldProductData: state.products.productData,
     loading: state.products.loading,
@@ -238,9 +239,9 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    addProductHandler: productData =>
+    addProductHandler: (productData) =>
       dispatch(prodActions.addProduct(productData)),
     disableErrors: () => dispatch(authActions.disableErrors()),
   };

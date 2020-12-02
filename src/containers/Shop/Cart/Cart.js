@@ -38,8 +38,8 @@ class Cart extends Component {
               <tr>
                 <th>Product Name</th>
                 <th>Price</th>
-                <th>Amount</th>
-                <th>Total</th>
+                <th>Quantity</th>
+                <th>Vat</th>
               </tr>
             </thead>
             <tbody>
@@ -58,7 +58,7 @@ class Cart extends Component {
                     </td>
                     <td>${product.productId.price}</td>
                     <td>{product.quantity}</td>
-                    <td>${product.productId.price * product.quantity}</td>
+                    <td>${0.2 * product.productId.price}</td>
                   </tr>
                 );
               })}

@@ -12,7 +12,7 @@
   margin: 0;
 }
 .Card {
-  height: 300px;
+  height: 280px;
   width: 14rem;
   text-align: center;
   padding-top: 10px;
@@ -31,15 +31,15 @@
   max-height: 120px;
 }
 .CardBody {
-  height: 200px;
+  height: 140px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 }
 .Header {
   width: 100%;
-  min-height: 40px;
+  max-height: 40px;
   text-align: center;
   padding-left: 10px;
   padding-right: 5px;
@@ -69,12 +69,25 @@
   color: #1784a0;
   font-size: 1.2em;
 }
-.ButtonContainer {
+.ButtonContainerAdmin {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0 14px 0 14px;
+}
+.ButtonContainerUser {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 0 20px 0 10px;
+  padding: 0 14px 0 14px;
 }
-.ButtonContainer button {
-  width: 90px;
+.ButtonContainerAdmin button {
+  width: 100%;
+  margin-bottom: 10px;
+}
+.ButtonContainerUser button {
+  width: 100%;
+}
+.Image {
+  cursor: pointer;
 }

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -17,7 +18,7 @@ class Login extends Component {
   onChangeHandler(event) {
     event.preventDefault();
     const userDataCopy = { ...this.state.userData };
-    Object.keys(userDataCopy).forEach(item => {
+    Object.keys(userDataCopy).forEach((item) => {
       if (event.target.name === item) {
         userDataCopy[item] = event.target.value;
       }
@@ -25,9 +26,10 @@ class Login extends Component {
     this.setState({ userData: userDataCopy });
   }
   render() {
+    console.log(this.props.history);
     let errorsObject = {};
     if (this.props.errors) {
-      this.props.errors.forEach(error => {
+      this.props.errors.forEach((error) => {
         errorsObject[error.param] = error.msg;
       });
     } else {
@@ -42,7 +44,7 @@ class Login extends Component {
             type="email"
             placeholder="Enter email"
             name="email"
-            onChange={event => this.onChangeHandler(event)}
+            onChange={(event) => this.onChangeHandler(event)}
           />
           <p
             style={{
@@ -62,7 +64,7 @@ class Login extends Component {
             type="password"
             placeholder="Password"
             name="password"
-            onChange={event => this.onChangeHandler(event)}
+            onChange={(event) => this.onChangeHandler(event)}
           />
           <p
             style={{
@@ -80,7 +82,12 @@ class Login extends Component {
           variant="primary"
           type="submit"
           style={{ marginTop: "10px" }}
-          onClick={() => this.props.loginHandler(this.state.userData)}
+          onClick={() =>
+            this.props.loginHandler(
+              this.state.userData,
+              this.props.history.action
+            )
+          }
         >
           Submit
         </Button>
@@ -110,4 +117,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default withRouter(Login);

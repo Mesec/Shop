@@ -51,9 +51,10 @@ export const getCartProductsSuccess = (cartProducts) => {
     cartProducts: cartProducts,
   };
 };
-export const getCartProductsFailed = () => {
+export const getCartProductsFailed = (isAuth) => {
   return {
     type: actionTypes.GET_CART_PRODUCTS_FAILED,
+    isAuth: isAuth,
   };
 };
 export const getCartProducts = () => {
@@ -68,7 +69,11 @@ export const getCartProducts = () => {
         dispatch(getCartProductsSuccess(response.data));
       })
       .catch((error) => {
-        console.log(error);
+        if (error.response.status === 401) {
+          dispatch(
+            getCartProductsFailed(error.response.data.isUserAuthenticated)
+          );
+        }
       });
   };
 };

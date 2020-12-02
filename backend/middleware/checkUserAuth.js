@@ -15,7 +15,6 @@ exports.isUserAuthenticated = (req, res, next) => {
   if (!decodedToken) {
     return res.status(401).json({ isUserAuthenticated: false });
   } else {
-    console.log(decodedToken);
     next();
   }
   //   next();

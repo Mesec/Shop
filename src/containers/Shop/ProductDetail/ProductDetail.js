@@ -114,12 +114,14 @@ class ProductDetail extends Component {
                       <button onClick={this.props.decreaseQuantity}>-</button>
                     </div>
                     <Button
-                      onClick={(event) =>
-                        this.addToCartHandler(event, {
-                          productId: this.props.product._id,
-                          quantity: this.props.quantity,
-                        })
-                      }
+                      onClick={(event) => {
+                        localStorage.getItem("token")
+                          ? this.addToCartHandler(event, {
+                              productId: this.props.product._id,
+                              quantity: this.props.quantity,
+                            })
+                          : this.props.history.push("/login");
+                      }}
                     >
                       Add to Cart
                     </Button>

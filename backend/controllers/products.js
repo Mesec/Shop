@@ -4,10 +4,10 @@ const { validationResult } = require("express-validator");
 //    ****GET ALL PRODUCTS FROM DB****
 exports.getProducts = (req, res, next) => {
   Product.find()
-    .then(products => {
+    .then((products) => {
       res.status(200).json({ products: products });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
     });
 };
@@ -16,10 +16,10 @@ exports.getProducts = (req, res, next) => {
 exports.getProduct = (req, res, next) => {
   const prodId = req.body.productId;
   Product.findById(prodId)
-    .then(product => {
+    .then((product) => {
       res.status(200).json(product);
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
     });
 };
@@ -47,10 +47,10 @@ exports.postProduct = (req, res, next) => {
     });
     product
       .save()
-      .then(result => {
+      .then((result) => {
         res.status(200).json(result);
       })
-      .catch(err => {
+      .catch((err) => {
         res.status(401).json(err);
       });
   }
@@ -68,7 +68,7 @@ exports.updateProduct = (req, res, next) => {
   const description = req.body.description;
 
   Product.findById(productId)
-    .then(product => {
+    .then((product) => {
       product.name = name;
       product.type = type;
       product.image = image;
@@ -82,15 +82,15 @@ exports.updateProduct = (req, res, next) => {
       else {
         return product
           .save()
-          .then(result => {
+          .then((result) => {
             res.status(200).json(result);
           })
-          .catch(err => {
+          .catch((err) => {
             res.status(402).json({ errors: errors });
           });
       }
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
     });
 };
@@ -99,11 +99,11 @@ exports.updateProduct = (req, res, next) => {
 
 exports.deleteProduct = (req, res, next) => {
   Product.findOneAndRemove({ _id: req.body._id })
-    .then(result => {
+    .then((result) => {
       console.log("product Deleted");
       res.status(200).json(result);
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
     });
 };

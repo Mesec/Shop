@@ -8,7 +8,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-import classes from "./ProductTable.module.css";
+import classes from "./ProductCart.module.css";
 
 const productCard = (props) => {
   let card = null;
@@ -18,17 +18,22 @@ const productCard = (props) => {
         <Col md="auto" key={product._id} className={classes.Col}>
           <Card className={classes.Card}>
             <div className={classes.ImageContainer}>
-              <img src={product.image} alt="" />
+              <img
+                src={product.image}
+                alt={product.name}
+                className={classes.Image}
+                onClick={() => props.click(product._id)}
+              />
             </div>
             <div className={classes.CardBody}>
               <div className={classes.Header}>
                 <h5>{product.name}</h5>
               </div>
               <div className={classes.Price}>
-                <h4>${product.price}</h4>
+                {props.path === "/" ? <h4>${product.price}</h4> : null}
               </div>
               {props.path === "/" ? (
-                <div className={classes.ButtonContainer}>
+                <div className={classes.ButtonContainerUser}>
                   <Button
                     size="sm"
                     onClick={() => props.click(product._id)}
@@ -39,7 +44,7 @@ const productCard = (props) => {
                   </Button>
                 </div>
               ) : (
-                <div className={classes.ButtonContainer}>
+                <div className={classes.ButtonContainerAdmin}>
                   <Button
                     size="sm"
                     className={classes.Button}
