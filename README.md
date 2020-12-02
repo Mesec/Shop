@@ -1,4 +1,4 @@
-# Reminder
+## Reminder
 
 Don't forget to run npm install in 'backend' folder and of course run the server.
 
