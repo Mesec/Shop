@@ -1,3 +1,7 @@
+#Reminder
+
+Don't forget to run npm install in 'backend' folder and of course run the server.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
