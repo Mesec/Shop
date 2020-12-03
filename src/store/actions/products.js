@@ -98,6 +98,7 @@ export const addProduct = (productData) => {
       .post("http://localhost:5000/products/add-product", productData)
       .then((response) => {
         dispatch(addProductSuccess());
+        dispatch(getProducts());
       })
       .catch((err) => {
         console.log(err.response.data.oldData);

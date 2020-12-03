@@ -72,6 +72,7 @@ const reducer = (state = initialState, action) => {
           amount: "",
           price: "",
           description: "",
+          errors: false,
         },
         isProductAdded: true,
       };
