@@ -6,43 +6,28 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Spinner from "../Spinner/Spinner";
 
-const modal = props => {
+const modal = (props) => {
   return (
     <Modal show={props.isModalShown} onHide={props.hideModalHandler}>
-      {props.loading ? (
-        <div
-          style={{
-            minHeight: "140px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
+      <Modal.Header>
+        <p>Do you want to delete this product ?</p>
+      </Modal.Header>
+      <Modal.Footer>
+        <Button
+          variant="primary"
+          onClick={() => props.deleteProduct(props.productToDelete)}
         >
-          <Spinner />
-        </div>
-      ) : (
-        <div style={{ minHeight: "100px" }}>
-          <Modal.Header>
-            <p>Do you want to delete this product ?</p>
-          </Modal.Header>
-          <Modal.Footer>
-            <Button
-              variant="primary"
-              onClick={() => props.deleteProduct(props.productToDelete)}
-            >
-              Yes
-            </Button>
-            <Button variant="secondary" onClick={props.hideModalHandler}>
-              No
-            </Button>
-          </Modal.Footer>
-        </div>
-      )}
+          Yes
+        </Button>
+        <Button variant="secondary" onClick={props.hideModalHandler}>
+          No
+        </Button>
+      </Modal.Footer>
     </Modal>
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     isModalShown: state.products.deletePrModal,
     productToDelete: state.products.productToDelete,
@@ -50,10 +35,10 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     hideModalHandler: () => dispatch(actions.delProdHideModal()),
-    deleteProduct: product => dispatch(actions.deleteProduct(product)),
+    deleteProduct: (product) => dispatch(actions.deleteProduct(product)),
   };
 };
 

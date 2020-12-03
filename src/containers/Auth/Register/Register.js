@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import * as authActions from "../../../store/actions/auth.js";
 import * as prodAction from "../../../store/actions/products.js";
+import classes from "./Register.module.css";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -14,114 +16,97 @@ class Login extends Component {
   componentDidMount() {
     this.props.disableErrors();
   }
+  registerUserHandler(userData) {
+    this.props.registerUserHandler(userData);
+    if (this.props.isUserRegistered) {
+      // this.props.history.push("login");
+    }
+  }
   render() {
     let errorsObject = {};
     if (this.props.errors) {
-      this.props.errors.forEach(error => {
+      this.props.errors.forEach((error) => {
         errorsObject[error.param] = error.msg;
       });
     } else {
       errorsObject = {};
     }
     let form = (
-      <Form.Group style={{ width: "100%" }}>
-        <h3>Register</h3>
-        <Form.Group>
-          <Form.Label>Email address</Form.Label>
+      <Form className={classes.Form}>
+        <div className={classes.Header}>
+          <h3>Register</h3>
+        </div>
+        <Form.Group className={classes.FormGroup}>
+          <Form.Label>Full Name</Form.Label>
           <Form.Control
             type="text"
             name="fullName"
             placeholder="Full Name"
-            onChange={event => this.props.onChangeHandler(event)}
+            value={this.props.userData.fullName}
+            size="sm"
+            onChange={(event) => this.props.onChangeHandler(event)}
           />
-          <p
-            style={{
-              color: "red",
-              fontSize: "0.8em",
-              paddingTop: "7px",
-              paddingLeft: "10px",
-              height: "15px",
-            }}
-          >
+          <p className={classes.Error}>
             {errorsObject.fullName ? errorsObject.fullName : ""}
           </p>
         </Form.Group>
-        <Form.Group controlId="formBasicEmail">
+        <Form.Group className={classes.FormGroup} controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
             type="email"
             name="email"
             placeholder="Enter email"
-            onChange={event => this.props.onChangeHandler(event)}
+            value={this.props.userData.email}
+            size="sm"
+            onChange={(event) => this.props.onChangeHandler(event)}
           />
-          <p
-            style={{
-              color: "red",
-              fontSize: "0.8em",
-              paddingTop: "7px",
-              paddingLeft: "10px",
-              height: "15px",
-            }}
-          >
+          <p className={classes.Error}>
             {errorsObject.email ? errorsObject.email : ""}
           </p>
         </Form.Group>
-        <Form.Group controlId="formBasicPassword">
+        <Form.Group className={classes.FormGroup} controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
             name="password"
             placeholder="Password"
-            onChange={event => this.props.onChangeHandler(event)}
+            value={this.props.userData.password}
+            size="sm"
+            onChange={(event) => this.props.onChangeHandler(event)}
           />
-          <p
-            style={{
-              color: "red",
-              fontSize: "0.8em",
-              paddingTop: "7px",
-              paddingLeft: "10px",
-              height: "15px",
-            }}
-          >
+          <p className={classes.Error}>
             {errorsObject.password ? errorsObject.password : ""}
           </p>
         </Form.Group>
-        <Form.Group controlId="formBasicPassword2">
+        <Form.Group
+          className={classes.FormGroup}
+          controlId="formBasicPassword2"
+        >
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control
             type="password"
             name="password2"
             placeholder="Confirm Password"
-            onChange={event => this.props.onChangeHandler(event)}
+            value={this.props.userData.password2}
+            size="sm"
+            onChange={(event) => this.props.onChangeHandler(event)}
           />
-          <p
-            style={{
-              color: "red",
-              fontSize: "0.8em",
-              paddingTop: "7px",
-              paddingLeft: "10px",
-              height: "15px",
-            }}
-          >
+          <p className={classes.Error}>
             {errorsObject.password2 ? errorsObject.password2 : ""}
           </p>
         </Form.Group>
         <Button
-          style={{ marginTop: "20px" }}
+          className={classes.Button}
           variant="primary"
           type="submit"
-          onClick={() => this.props.registerUserHandler(this.props.userData)}
+          onClick={() => this.registerUserHandler(this.props.userData)}
         >
           Submit
         </Button>
-      </Form.Group>
+      </Form>
     );
     return (
-      <Container
-        style={{
-          margin: "50px auto 0 auto",
-        }}
-      >
+      <Container className={classes.Container}>
         <Row>
           <Col>
             {this.props.loading ? (
@@ -144,20 +129,21 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     userData: state.auth.registerData,
     errors: state.auth.errors,
     loading: state.auth.loading,
+    isUserRegistered: state.auth.isUserRegistered,
   };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onChangeHandler: event => dispatch(authActions.regChangeHandler(event)),
-    registerUserHandler: userData =>
+    onChangeHandler: (event) => dispatch(authActions.regChangeHandler(event)),
+    registerUserHandler: (userData) =>
       dispatch(authActions.registerUser(userData)),
     disableErrors: () => dispatch(prodAction.disableErrors()),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login));

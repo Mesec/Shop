@@ -38,6 +38,7 @@ const reducer = (state = initialState, action) => {
         loading: true,
       };
     case actionTypes.GET_CART_PRODUCTS_SUCCESS:
+      console.log(action.cartProducts);
       let total = 0;
       action.cartProducts.forEach((product) => {
         total += product.quantity * product.productId.price;

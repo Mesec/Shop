@@ -100,6 +100,7 @@ export const addProduct = (productData) => {
         dispatch(addProductSuccess());
       })
       .catch((err) => {
+        console.log(err.response.data.oldData);
         dispatch(
           addProductFailed(
             err.response.data.errors.errors,
@@ -109,7 +110,12 @@ export const addProduct = (productData) => {
       });
   };
 };
-
+export const addProductChangeHandler = (event) => {
+  return {
+    type: actionTypes.ADD_PRODUCT_CHANGE_HANDLER,
+    event: event,
+  };
+};
 //    EDIT PRODUCT
 export const productChangeHandler = (event) => {
   //On Change Handler

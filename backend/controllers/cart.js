@@ -20,10 +20,11 @@ exports.getCartProducts = (req, res, next) => {
   User.findById(userId)
     .populate("cart.items.productId")
     .then((user) => {
+      // console.log(user.cart.items[0].productId);
       res.json(user.cart.items);
     })
     .catch((error) => {
-      console.log(error);
+      res.json(error);
     });
 };
 

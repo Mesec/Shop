@@ -23,12 +23,10 @@ class App extends Component {
   };
 
   loginUserHandler = (userData, action) => {
-    console.log(action);
     this.setState({ loading: true });
     axios
       .post("http://localhost:5000/auth/login", userData)
       .then((response) => {
-        console.log(response);
         localStorage.setItem("token", response.data.token);
         this.setState({ isAuth: true, loading: false });
         this.props.history.goBack();
@@ -52,7 +50,6 @@ class App extends Component {
     } else {
       isAuth = false;
     }
-    console.log(isAuth);
     return (
       <Container fluid className={classes.App}>
         <Layout logoutHandler={this.logoutUserHandler}>

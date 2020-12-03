@@ -14,6 +14,7 @@ const initialState = {
   errors: false,
   loading: false,
   isAuthenticated: false,
+  isUserRegistered: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -21,7 +22,7 @@ const reducer = (state = initialState, action) => {
     //Register controls
     case actionTypes.REGISTER_CHANGE_HANDLER:
       const regDataCopy = { ...state.registerData };
-      Object.keys(regDataCopy).forEach(item => {
+      Object.keys(regDataCopy).forEach((item) => {
         if (item === action.event.target.name) {
           regDataCopy[item] = action.event.target.value;
         }
@@ -39,14 +40,22 @@ const reducer = (state = initialState, action) => {
     case actionTypes.REGISTER_USER_SUCCESS:
       return {
         ...state,
-        erros: false,
+        errors: false,
         loading: false,
+        isUserRegistered: true,
+        registerData: {
+          fullName: "",
+          email: "",
+          password: "",
+          password2: "",
+        },
       };
     case actionTypes.REGISTER_USER_FAILED:
       return {
         ...state,
         errors: action.errors,
         loading: false,
+        isUserRegistered: true,
       };
     case actionTypes.DISABLE_ERRORS:
       return {
@@ -56,7 +65,7 @@ const reducer = (state = initialState, action) => {
     //Login controls
     case actionTypes.LOGIN_CHANGE_HANDLER:
       const loginDataCopy = { ...state.loginData };
-      Object.keys(loginDataCopy).forEach(item => {
+      Object.keys(loginDataCopy).forEach((item) => {
         if (item === action.event.target.name) {
           loginDataCopy[item] = action.event.target.value;
         }

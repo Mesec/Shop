@@ -17,6 +17,7 @@ const initialState = {
   deletePrModal: false,
   productToUpdate: null,
   productToDelete: null,
+  isProductAdded: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -58,6 +59,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
+        isProductAdded: false,
       };
     case actionTypes.ADD_PRODUCT_SUCCESS:
       return {
@@ -71,6 +73,7 @@ const reducer = (state = initialState, action) => {
           price: "",
           description: "",
         },
+        isProductAdded: true,
       };
     case actionTypes.ADD_PRODUCT_FAILED:
       return {
@@ -78,6 +81,18 @@ const reducer = (state = initialState, action) => {
         loading: false,
         errors: action.errors,
         productData: action.oldData,
+        isProductAdded: false,
+      };
+    case actionTypes.ADD_PRODUCT_CHANGE_HANDLER:
+      const updatedProductData = { ...state.productData };
+      Object.keys(updatedProductData).forEach((item) => {
+        if (action.event.target.name === item) {
+          updatedProductData[item] = action.event.target.value;
+        }
+      });
+      return {
+        ...state,
+        productData: updatedProductData,
       };
 
     //    ****EDIT PRODUCT****

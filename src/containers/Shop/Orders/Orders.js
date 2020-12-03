@@ -13,11 +13,9 @@ class Orders extends Component {
     this.props.getOrders();
   }
   render() {
-    console.log(this.props.orders);
     let orders = null;
 
     if (this.props.orders) {
-      console.log(this.props.orders);
       orders = this.props.orders.map((order) => {
         return (
           <Card className={classes.Card}>

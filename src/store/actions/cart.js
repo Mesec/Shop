@@ -69,11 +69,13 @@ export const getCartProducts = () => {
         dispatch(getCartProductsSuccess(response.data));
       })
       .catch((error) => {
-        if (error.response.status === 401) {
-          dispatch(
-            getCartProductsFailed(error.response.data.isUserAuthenticated)
-          );
-        }
+        console.log(error);
+        console.log(error.response);
+        // if (error.response.status === 401) {
+        //   dispatch(
+        //     getCartProductsFailed(error.response.data.isUserAuthenticated)
+        //   );
+        // }
       });
   };
 };

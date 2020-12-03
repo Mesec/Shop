@@ -11,7 +11,8 @@ router.post(
     .isString()
     .isLength({ min: 6 })
     .withMessage("Full name should be at least 6 characters long."),
-  body("email").isEmail().notEmpty().withMessage("Email is required."),
+  body("email").notEmpty().withMessage("Email is required."),
+  body("email").isEmail().withMessage("Email should be regular email"),
   body("password")
     .isString()
     .isLength({ min: 6 })

@@ -8,7 +8,7 @@ exports.createUser = (req, res, next) => {
   const fullName = req.body.fullName;
   const email = req.body.email;
   const password = req.body.password;
-  const password2 = req.body.password;
+  const password2 = req.body.password2;
 
   const errors = validationResult(req);
   if (!errors.isEmpty())
@@ -21,7 +21,7 @@ exports.createUser = (req, res, next) => {
           errors: [
             {
               param: "email",
-              msg: "Email alredy in use.",
+              msg: "Email already in use.",
               value: email,
               location: "body",
             },
@@ -30,6 +30,7 @@ exports.createUser = (req, res, next) => {
       });
     } else {
       if (password !== password2) {
+        console.log("Wrong Password");
         return res.status(422).json({
           errors: {
             errors: [
@@ -58,6 +59,7 @@ exports.createUser = (req, res, next) => {
         user
           .save()
           .then((response) => {
+            console.log("user Added");
             res.status(200).json(response);
           })
           .catch((err) => {
