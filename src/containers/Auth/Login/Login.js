@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import classes from "./Login.module.css";
+import * as authActions from "../../../store/actions/auth";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -11,22 +12,6 @@ import Col from "react-bootstrap/Col";
 import Spinner from "../../../components/Spinner/Spinner";
 
 class Login extends Component {
-  state = {
-    userData: {
-      email: "",
-      password: "",
-    },
-  };
-  onChangeHandler(event) {
-    event.preventDefault();
-    const userDataCopy = { ...this.state.userData };
-    Object.keys(userDataCopy).forEach((item) => {
-      if (event.target.name === item) {
-        userDataCopy[item] = event.target.value;
-      }
-    });
-    this.setState({ userData: userDataCopy });
-  }
   render() {
     console.log(this.props.history);
     let errorsObject = {};
@@ -49,7 +34,8 @@ class Login extends Component {
             placeholder="Enter email"
             name="email"
             size="sm"
-            onChange={(event) => this.onChangeHandler(event)}
+            value={this.props.userData.email}
+            onChange={(event) => this.props.onChangeHandler(event)}
           />
           <p className={classes.Error}>
             {errorsObject.email ? errorsObject.email : ""}
@@ -62,7 +48,8 @@ class Login extends Component {
             placeholder="Password"
             name="password"
             size="sm"
-            onChange={(event) => this.onChangeHandler(event)}
+            value={this.props.userData.password}
+            onChange={(event) => this.props.onChangeHandler(event)}
           />
           <p className={classes.Error}>
             {errorsObject.password ? errorsObject.password : ""}
@@ -72,11 +59,12 @@ class Login extends Component {
           variant="primary"
           type="submit"
           className={classes.Button}
-          onClick={() =>
-            this.props.loginHandler(
-              this.state.userData,
-              this.props.history.action
-            )
+          onClick={(event) =>
+            this.props.loginUserHandler({
+              userData: this.props.userData,
+              history: this.props.history,
+              event: event,
+            })
           }
         >
           Submit
@@ -107,4 +95,19 @@ class Login extends Component {
   }
 }
 
-export default connect()(withRouter(Login));
+const mapStateToProps = (state) => {
+  return {
+    userData: state.auth.loginData,
+    errors: state.auth.errors,
+    loading: state.auth.loading,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loginUserHandler: (data) => dispatch(authActions.loginUser(data)),
+    onChangeHandler: (event) => dispatch(authActions.loginChangeHandler(event)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login));

@@ -33,7 +33,7 @@ class ProductDetail extends Component {
   addToCartHandler = (event, cartData) => {
     event.preventDefault();
     this.props.addToCart(cartData);
-    this.props.history.replace("/cart");
+    // this.props.history.replace("/cart");
   };
   render() {
     return (
@@ -119,8 +119,14 @@ class ProductDetail extends Component {
                           ? this.addToCartHandler(event, {
                               productId: this.props.product._id,
                               quantity: this.props.quantity,
+                              history: this.props.history,
                             })
-                          : this.props.history.push("/login");
+                          : this.props.history.push({
+                              pathname: "/login",
+                              state:
+                                this.props.history.location.pathname +
+                                this.props.history.location.search,
+                            });
                       }}
                     >
                       Add to Cart

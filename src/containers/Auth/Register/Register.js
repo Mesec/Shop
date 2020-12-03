@@ -16,12 +16,7 @@ class Login extends Component {
   componentDidMount() {
     this.props.disableErrors();
   }
-  registerUserHandler(userData) {
-    this.props.registerUserHandler(userData);
-    if (this.props.isUserRegistered) {
-      // this.props.history.push("login");
-    }
-  }
+
   render() {
     let errorsObject = {};
     if (this.props.errors) {
@@ -99,7 +94,12 @@ class Login extends Component {
           className={classes.Button}
           variant="primary"
           type="submit"
-          onClick={() => this.registerUserHandler(this.props.userData)}
+          onClick={() =>
+            this.props.registerUserHandler({
+              userData: this.props.userData,
+              history: this.props.history,
+            })
+          }
         >
           Submit
         </Button>

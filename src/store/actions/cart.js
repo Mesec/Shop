@@ -29,10 +29,11 @@ export const addToCart = (cartData) => {
       })
       .then((result) => {
         dispatch(addToCartSuccess());
+        cartData.history.push("/cart");
       })
-      .then(() => {
-        dispatch(getCartProducts());
-      })
+      // .then(() => {
+      //   dispatch(getCartProducts());
+      // })
       .catch((error) => {
         dispatch(addToCartFailed());
       });

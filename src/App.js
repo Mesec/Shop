@@ -22,22 +22,22 @@ class App extends Component {
     loading: false,
   };
 
-  loginUserHandler = (userData, action) => {
-    this.setState({ loading: true });
-    axios
-      .post("http://localhost:5000/auth/login", userData)
-      .then((response) => {
-        localStorage.setItem("token", response.data.token);
-        this.setState({ isAuth: true, loading: false });
-        this.props.history.goBack();
-      })
-      .catch((error) => {
-        this.setState({
-          errors: error.response.data.errors.errors,
-          loading: false,
-        });
-      });
-  };
+  // loginUserHandler = (userData, action) => {
+  //   this.setState({ loading: true });
+  //   axios
+  //     .post("http://localhost:5000/auth/login", userData)
+  //     .then((response) => {
+  //       localStorage.setItem("token", response.data.token);
+  //       this.setState({ isAuth: true, loading: false });
+  //       this.props.history.goBack();
+  //     })
+  //     .catch((error) => {
+  //       this.setState({
+  //         errors: error.response.data.errors.errors,
+  //         loading: false,
+  //       });
+  //     });
+  // };
 
   logoutUserHandler = () => {
     localStorage.removeItem("token");
@@ -60,7 +60,7 @@ class App extends Component {
               path="/login"
               component={() => (
                 <Login
-                  loginHandler={this.loginUserHandler}
+                  // loginHandler={this.loginUserHandler}
                   errors={this.state.errors}
                   loading={this.state.loading}
                 />
