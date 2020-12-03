@@ -25,7 +25,7 @@ class Login extends Component {
     const form = (
       <Form className={classes.Form}>
         <div className={classes.Header}>
-          <h3>Login</h3>
+          <p>Login</p>
         </div>
         <Form.Group className={classes.FormGroup} controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>

@@ -29,7 +29,7 @@ class Login extends Component {
     let form = (
       <Form className={classes.Form}>
         <div className={classes.Header}>
-          <h3>Register</h3>
+          <p>Register</p>
         </div>
         <Form.Group className={classes.FormGroup}>
           <Form.Label>Full Name</Form.Label>
