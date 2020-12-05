@@ -17,12 +17,14 @@ const productCard = (props) => {
       return (
         <Col md="auto" key={product._id} className={classes.Col}>
           <Card className={classes.Card}>
-            <div className={classes.ImageContainer}>
+            <div
+              className={classes.ImageContainer}
+              onClick={() => props.click(product._id)}
+            >
               <img
                 src={product.image}
                 alt={product.name}
                 className={classes.Image}
-                onClick={() => props.click(product._id)}
               />
             </div>
             <div className={classes.CardBody}>
@@ -38,7 +40,7 @@ const productCard = (props) => {
                     size="sm"
                     onClick={() => props.click(product._id)}
                     className={classes.Button}
-                    variant="info"
+                    variant="primary"
                   >
                     Details
                   </Button>
@@ -48,7 +50,7 @@ const productCard = (props) => {
                   <Button
                     size="sm"
                     className={classes.Button}
-                    variant="info"
+                    variant="primary"
                     onClick={() => props.updProdShowModalHandler(product)}
                   >
                     Edit
@@ -56,7 +58,7 @@ const productCard = (props) => {
                   <Button
                     size="sm"
                     className={classes.Button}
-                    variant="info"
+                    variant="primary"
                     onClick={() => props.delProdShowModalHandler(product)}
                   >
                     Delete

@@ -87,7 +87,7 @@ class Cart extends Component {
                 <Card.Title style={{ fontSize: "1em" }}>
                   All Together
                 </Card.Title>
-                <Card.Title style={{ fontSize: "1em" }}>
+                <Card.Title style={{ fontSize: "1em", margin: 0 }}>
                   $ {this.props.totalPrice.toFixed(2)}
                 </Card.Title>
               </div>
@@ -96,6 +96,7 @@ class Cart extends Component {
                 onClick={this.props.showModalHandler}
                 style={{ width: "100%" }}
                 variant="primary"
+                size="sm"
               >
                 Order
               </Button>
@@ -103,6 +104,7 @@ class Cart extends Component {
                 onClick={this.props.clearCart}
                 style={{ width: "100%", marginTop: "10px" }}
                 variant="primary"
+                size="sm"
               >
                 Delete
               </Button>

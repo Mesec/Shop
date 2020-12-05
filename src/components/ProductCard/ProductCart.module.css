@@ -1,15 +1,21 @@
 .Container {
-  /* background-color: red; */
   width: 100%;
 }
 .Row {
-  display: flex;
-  justify-content: start;
+  width: 100%;
   display: flex;
   justify-content: center;
 }
 .Col {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.CardsContainer {
+  display: flex;
+  flex-direction: row;
+  background-color: red;
 }
 .Card {
   height: 280px;
@@ -17,8 +23,11 @@
   text-align: center;
   padding-top: 10px;
   margin-bottom: 35px;
-  box-shadow: 0px 1px 3px rgb(146, 144, 144);
+  box-shadow: 0px 1px 3px rgb(197, 195, 195);
   overflow: hidden;
+}
+.Card:hover {
+  box-shadow: 0px 1px 4px rgb(126, 124, 124);
 }
 .ImageContainer {
   width: 100%;
@@ -28,6 +37,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 .ImageContainer img {
   max-width: 100%;
@@ -52,6 +62,7 @@
   font-size: 0.9em;
   font-weight: normal;
   color: rgb(112, 110, 110);
+  font-weight: bold;
 }
 .Price {
   width: 100%;

@@ -13,12 +13,6 @@ import Row from "react-bootstrap/Row";
 import Spinner from "../../../components/Spinner/Spinner";
 
 class ProductDetail extends Component {
-  state = {
-    product: null,
-    productId: null,
-    quantity: 1,
-  };
-
   componentDidMount() {
     const query = new URLSearchParams(this.props.location.search);
     let productId;
@@ -37,101 +31,82 @@ class ProductDetail extends Component {
   };
   render() {
     return (
-      <Container style={{ padding: "20px 0px 50px 20px" }}>
+      <Container className={classes.Container}>
         <Row>
           {this.props.loading ? (
-            <div
-              style={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-              }}
-            >
+            <div className={classes.Spinner}>
               <Spinner />
             </div>
           ) : (
-            <Card
-              size="sm"
-              style={{
-                border: "none",
-                position: "relative",
-                left: "50%",
-                transform: "translate(-50%)",
-              }}
-            >
+            <Card className={classes.Card}>
               <Card.Header>
                 <h5>{this.props.product ? this.props.product.name : null}</h5>
                 <p className={classes.ID}>
                   SKU: {this.props.product ? this.props.product._id : null}
                 </p>
               </Card.Header>
-              <Card.Body
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                <div
-                  style={{
-                    width: "300px",
-                    height: "200px",
-                    overflow: "hidden",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Card.Img
-                    style={{ maxHeight: "100%", maxWidth: "80%" }}
-                    variant="top"
-                    src={this.props.product ? this.props.product.image : null}
-                    alt={this.props.product ? this.props.product.name : null}
-                  />
+              <div className={classes.CardBody}>
+                <div>
+                  <Card.Body className={classes.LeftSide}>
+                    <div className={classes.ImageContainer}>
+                      <Card.Img
+                        src={
+                          this.props.product ? this.props.product.image : null
+                        }
+                        alt={
+                          this.props.product ? this.props.product.name : null
+                        }
+                      />
+                    </div>
+                  </Card.Body>
                 </div>
-              </Card.Body>
+                <Card.Body className={classes.RightSide}>
+                  <div>
+                    <h6>
+                      In stock:{" "}
+                      {this.props.product ? this.props.product.amount : null}
+                    </h6>
+                    <h6>
+                      Price: $
+                      {this.props.product ? this.props.product.price : null}
+                    </h6>
+                  </div>
+                  <p>
+                    {this.props.product ? this.props.product.description : null}
+                  </p>
+                </Card.Body>
+              </div>
               <Card.Footer>
                 <div className={classes.AddToCartActions}>
-                  <h6>
-                    In stock:{" "}
-                    {this.props.product ? this.props.product.amount : null}
-                  </h6>
-                  <h4>
-                    Price: $
-                    {this.props.product ? this.props.product.price : null}
-                  </h4>
-                  <div className={classes.SelectAmount}>
-                    <span>{this.props.quantity}</span>
-                    <div className={classes.Buttons}>
-                      <button
-                        onClick={() =>
-                          this.props.increaseQuantity(this.props.product.amount)
-                        }
-                      >
-                        +
-                      </button>
-                      <button onClick={this.props.decreaseQuantity}>-</button>
-                    </div>
+                  <span>{this.props.quantity}</span>
+                  <div className={classes.Buttons}>
                     <Button
-                      onClick={(event) => {
-                        localStorage.getItem("token")
-                          ? this.addToCartHandler(event, {
-                              productId: this.props.product._id,
-                              quantity: this.props.quantity,
-                              history: this.props.history,
-                            })
-                          : this.props.history.push({
-                              pathname: "/login",
-                              state:
-                                this.props.history.location.pathname +
-                                this.props.history.location.search,
-                            });
-                      }}
+                      onClick={() =>
+                        this.props.increaseQuantity(this.props.product.amount)
+                      }
                     >
-                      Add to Cart
+                      +
                     </Button>
+                    <Button onClick={this.props.decreaseQuantity}>-</Button>
                   </div>
+                  <Button
+                    onClick={(event) => {
+                      localStorage.getItem("token")
+                        ? this.addToCartHandler(event, {
+                            productId: this.props.product._id,
+                            quantity: this.props.quantity,
+                            history: this.props.history,
+                          })
+                        : this.props.history.push({
+                            pathname: "/login",
+                            state:
+                              this.props.history.location.pathname +
+                              this.props.history.location.search,
+                          });
+                    }}
+                  >
+                    Add to Cart
+                  </Button>
                 </div>
               </Card.Footer>
             </Card>
