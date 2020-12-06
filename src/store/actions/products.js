@@ -221,3 +221,15 @@ export const disableErrors = () => {
     type: actionTypes.DISABLE_ERRORS,
   };
 };
+
+//Side drawer
+export const showSideDrawer = () => {
+  return {
+    type: actionTypes.SHOW_SIDE_DRAWER,
+  };
+};
+export const hideSideDrawer = () => {
+  return {
+    type: actionTypes.HIDE_SIDE_DRAWER,
+  };
+};

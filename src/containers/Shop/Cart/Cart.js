@@ -121,7 +121,7 @@ class Cart extends Component {
       );
     }
     return (
-      <Container style={{ padding: "50px 0px 50px 20px" }}>
+      <Container className={classes.Container}>
         {this.props.loading ? (
           <div
             style={{

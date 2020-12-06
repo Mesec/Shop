@@ -22,23 +22,6 @@ class App extends Component {
     loading: false,
   };
 
-  // loginUserHandler = (userData, action) => {
-  //   this.setState({ loading: true });
-  //   axios
-  //     .post("http://localhost:5000/auth/login", userData)
-  //     .then((response) => {
-  //       localStorage.setItem("token", response.data.token);
-  //       this.setState({ isAuth: true, loading: false });
-  //       this.props.history.goBack();
-  //     })
-  //     .catch((error) => {
-  //       this.setState({
-  //         errors: error.response.data.errors.errors,
-  //         loading: false,
-  //       });
-  //     });
-  // };
-
   logoutUserHandler = () => {
     localStorage.removeItem("token");
     this.setState({ isAuth: false });
@@ -56,6 +39,8 @@ class App extends Component {
           <Switch>
             <Route path="/" exact component={() => <Products />} />
             <Route path="/product" exact component={() => <ProductDetail />} />
+            <Route path="/cart" component={() => <Cart />} />
+
             <Route
               path="/login"
               component={() => (
@@ -80,7 +65,6 @@ class App extends Component {
                   exact
                   component={() => <AddProduct />}
                 />
-                <Route path="/cart" component={() => <Cart />} />
                 <Route path="/orders" component={() => <Orders />} />
               </div>
             ) : (

@@ -31,9 +31,6 @@ export const addToCart = (cartData) => {
         dispatch(addToCartSuccess());
         cartData.history.push("/cart");
       })
-      // .then(() => {
-      //   dispatch(getCartProducts());
-      // })
       .catch((error) => {
         dispatch(addToCartFailed());
       });

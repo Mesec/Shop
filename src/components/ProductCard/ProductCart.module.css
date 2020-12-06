@@ -80,8 +80,8 @@
 }
 .Price h4 {
   line-height: 20px;
-  color: #1784a0;
   font-size: 1.2em;
+  color: rgb(66, 65, 65);
 }
 .ButtonContainerAdmin {
   display: flex;

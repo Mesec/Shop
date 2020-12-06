@@ -1,0 +1,75 @@
+.SideDrawer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 300px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  transition: transform 0.5s ease;
+  z-index: 900;
+}
+.SideDrawerVisible {
+  transform: translate(0);
+}
+.SideDrawerHidden {
+  transform: translateX(-100%);
+}
+.Card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+.Header {
+  display: flex;
+  padding: 10px 0 5px 15px;
+}
+.Close {
+  position: absolute;
+  right: 7px;
+  top: 0;
+  cursor: pointer;
+  font-size: 1.5em;
+  color: rgb(94, 91, 91);
+}
+.Close:hover {
+  color: #007bff;
+}
+.Banner {
+  color: rgb(94, 91, 91);
+}
+.Body {
+  height: 100%;
+  padding: 0;
+  margin-top: 10px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+.Categories {
+  font-weight: bolder;
+  margin: 0;
+  font-size: 1.1em;
+  padding: 2px 4px 0 10px;
+  margin-bottom: 10px;
+}
+
+.Category h6 {
+  margin: 0;
+  font-weight: normal;
+  padding: 10px 0 10px 16px;
+  width: 100%;
+  font-weight: normal;
+  cursor: pointer;
+  transform: all ease 0.5s;
+}
+.Category span {
+  font-weight: bold;
+  padding-right: 5px;
+}
+.Category h6:hover {
+  background-color: rgb(231, 226, 226);
+  font-weight: 500;
+}

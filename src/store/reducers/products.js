@@ -18,6 +18,7 @@ const initialState = {
   productToUpdate: null,
   productToDelete: null,
   isProductAdded: false,
+  isSideDrawerShown: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -127,7 +128,7 @@ const reducer = (state = initialState, action) => {
         productToUpdate: { ...productCopy },
       };
 
-    //    -Update product -modal controlls
+    //    -Update product -modal controls
     case actionTypes.SHOW_UPDATE_PRODUCT_MODAL:
       return {
         ...state,
@@ -157,7 +158,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         loading: false,
       };
-    //    -Delete product -modal controlls
+    //    -Delete product -modal controls
     case actionTypes.SHOW_DELETE_PRODUCT_MODAL:
       return {
         ...state,
@@ -169,7 +170,17 @@ const reducer = (state = initialState, action) => {
         ...state,
         deletePrModal: false,
       };
-
+    //Side drawer controls
+    case actionTypes.SHOW_SIDE_DRAWER:
+      return {
+        ...state,
+        isSideDrawerShown: true,
+      };
+    case actionTypes.HIDE_SIDE_DRAWER:
+      return {
+        ...state,
+        isSideDrawerShown: false,
+      };
     default:
       return state;
   }

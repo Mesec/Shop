@@ -4,12 +4,15 @@ import { NavLink } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavItem from "react-bootstrap/NavItem";
+import ToggleButton from "../ToggleButton/Toggle";
 
 const navigation = (props) => {
   let token = localStorage.getItem("token");
 
   return (
     <Navbar bg="primary" variant="dark" expand="md">
+      <ToggleButton />
+
       <Navbar.Brand href="#home">Online-Shop</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions/products";
+import classes from "./Products.module.css";
 
 import ProductCard from "../../../components/ProductCard/ProductCard";
 import Spinner from "../../../components/Spinner/Spinner";
@@ -22,7 +23,7 @@ class Products extends Component {
   };
   render() {
     return (
-      <div style={{ padding: "50px 0px 50px 20px" }}>
+      <div className={classes.Container}>
         {this.props.loading ? (
           <div
             style={{
