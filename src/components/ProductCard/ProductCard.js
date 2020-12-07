@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/products";
+import { withRouter } from "react-router-dom";
 
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
@@ -34,7 +35,7 @@ const productCard = (props) => {
               <div className={classes.Price}>
                 {props.path === "/" ? <h4>${product.price}</h4> : null}
               </div>
-              {props.path === "/" ? (
+              {props.path === "/" || props.history.location.search !== "" ? (
                 <div className={classes.ButtonContainerUser}>
                   <Button
                     size="sm"
@@ -88,4 +89,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(productCard);
+export default connect(null, mapDispatchToProps)(withRouter(productCard));

@@ -13,7 +13,9 @@ const navigation = (props) => {
     <Navbar bg="primary" variant="dark" expand="md">
       <ToggleButton />
 
-      <Navbar.Brand href="#home">Online-Shop</Navbar.Brand>
+      <Navbar.Brand as={NavLink} to="/">
+        Online-Shop
+      </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">

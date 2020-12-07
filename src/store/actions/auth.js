@@ -69,10 +69,8 @@ export const loginUser = (data) => {
     axios
       .post("http://localhost:5000/auth/login", data.userData)
       .then((response) => {
-        console.log(response);
         localStorage.setItem("token", response.data.token);
         dispatch(loginUserSuccess());
-        console.log(data);
         if (data.history.location.state) {
           data.history.push(data.history.location.state);
         } else {

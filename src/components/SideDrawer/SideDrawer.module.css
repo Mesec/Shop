@@ -48,6 +48,7 @@
 
 .Banner {
   color: white;
+  cursor: pointer;
 }
 .Body {
   height: 100%;
@@ -79,6 +80,7 @@
   font-weight: normal;
   cursor: pointer;
   transition: all ease-in 0.2s;
+  text-transform: capitalize;
 }
 
 .Category h6:hover {

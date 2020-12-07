@@ -42,6 +42,8 @@ class App extends Component {
         <Layout logoutHandler={this.logoutUserHandler}>
           <Switch>
             <Route path="/" exact component={() => <Products />} />
+            <Route path="/products" exact component={() => <Products />} />
+
             <Route path="/product" exact component={() => <ProductDetail />} />
             <Route path="/cart" component={() => <Cart />} />
 

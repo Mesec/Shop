@@ -3,9 +3,28 @@ const { validationResult } = require("express-validator");
 
 //    ****GET ALL PRODUCTS FROM DB****
 exports.getProducts = (req, res, next) => {
+  console.log(req.body.type);
   Product.find()
     .then((products) => {
-      res.status(200).json({ products: products });
+      let types = [];
+      products.forEach((product) => {
+        types.push(product.type);
+      });
+      const filteredTypes = types.filter(
+        (item, index) => types.indexOf(item) === index
+      );
+
+      if (req.body.type) {
+        const filteredProducts = products.filter(
+          (product) => product.type === req.body.type
+        );
+        return res
+          .status(200)
+          .json({ products: filteredProducts, filteredTypes: filteredTypes });
+      }
+      res
+        .status(200)
+        .json({ products: products, filteredTypes: filteredTypes });
     })
     .catch((err) => {
       console.log(err);

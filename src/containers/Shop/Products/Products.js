@@ -12,13 +12,24 @@ class Products extends Component {
     path: null,
   };
   componentDidMount() {
+    const query = new URLSearchParams(this.props.location.search);
+    let productId;
+
+    for (let param of query.entries()) {
+      productId = param[0];
+    }
     this.setState({ path: this.props.history.location.pathname });
-    this.props.getProductsHandler();
+
+    if (this.props.history.location.search === "") {
+      this.props.getProductsHandler();
+    } else {
+      this.props.getProductsHandler(productId);
+    }
   }
-  setQueryParamsForProductDetail = (movieId) => {
+  setQueryParamsForProductDetail = (productId) => {
     this.props.history.push({
       pathname: "/product",
-      search: "?" + movieId,
+      search: "?" + productId,
     });
   };
   render() {
@@ -59,7 +70,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getProductsHandler: () => dispatch(actions.getProducts()),
+    getProductsHandler: (type) => dispatch(actions.getProducts(type)),
   };
 };
 

@@ -2,6 +2,7 @@ import * as actionTypes from "../actions/actionsTypes";
 
 const initialState = {
   products: null,
+  productTypes: null,
   product: null,
   productData: {
     name: "",
@@ -36,6 +37,7 @@ const reducer = (state = initialState, action) => {
         loading: false,
         errors: false,
         product: null,
+        productTypes: action.filteredTypes,
       };
     //    ****GET SINGLE PRODUCT****
     case actionTypes.GET_SINGLE_PRODUCT_START:

@@ -7,10 +7,11 @@ export const getProductsStart = () => {
     type: actionTypes.GET_PRODUCTS_START,
   };
 };
-export const getProductsSuccess = (products) => {
+export const getProductsSuccess = (products, filteredTypes) => {
   return {
     type: actionTypes.GET_PRODUCTS_SUCCESS,
     products: products,
+    filteredTypes: filteredTypes,
   };
 };
 export const getProductsFailed = () => {
@@ -19,21 +20,31 @@ export const getProductsFailed = () => {
   };
 };
 
-export const getProducts = () => {
+export const getProducts = (type) => {
   return (dispatch) => {
     dispatch(getProductsStart());
     axios
       .post("http://localhost:5000/products/get-products", {
         Authorization: "Bearer " + localStorage.getItem("token"),
+        type: type,
       })
       .then((products) => {
-        dispatch(getProductsSuccess(products.data.products));
+        dispatch(
+          getProductsSuccess(
+            products.data.products,
+            products.data.filteredTypes
+          )
+        );
+        dispatch(hideSideDrawer());
       })
       .catch((err) => {
         dispatch(getProductsFailed());
       });
   };
 };
+
+//GET PRODUCTS FILTERED BY TYPE
+export const getFilteredProducts = () => {};
 
 // GET SINGLE PRODUCT FROM DB
 export const getSingleProductStart = () => {
@@ -63,7 +74,6 @@ export const getSingleProduct = (productId) => {
         dispatch(getSingleProductSuccess(res.data));
       })
       .catch((err) => {
-        console.log(err.response);
         dispatch(getSingleProductFailed());
       });
   };

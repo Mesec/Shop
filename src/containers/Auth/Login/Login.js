@@ -13,7 +13,6 @@ import Spinner from "../../../components/Spinner/Spinner";
 
 class Login extends Component {
   render() {
-    console.log(this.props.history);
     let errorsObject = {};
     if (this.props.errors) {
       this.props.errors.forEach((error) => {
