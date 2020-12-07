@@ -3,7 +3,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import classes from "./App.module.css";
 import { Switch, Route, withRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import axios from "axios";
 
 import Container from "react-bootstrap/Container";
 import Layout from "./containers/Layout/Layout";
@@ -27,6 +26,11 @@ class App extends Component {
     this.setState({ isAuth: false });
   };
   render() {
+    document.getElementsByTagName("BODY")[0].className = this.props
+      .showSideDrawer
+      ? classes.NoScroll
+      : classes.WithScroll;
+
     let isAuth;
     if (localStorage.getItem("token")) {
       isAuth = true;
@@ -45,7 +49,6 @@ class App extends Component {
               path="/login"
               component={() => (
                 <Login
-                  // loginHandler={this.loginUserHandler}
                   errors={this.state.errors}
                   loading={this.state.loading}
                 />
@@ -81,4 +84,5 @@ const mapStateToProps = (state) => {
     isAuth: state.auth.isAuthenticated,
   };
 };
+
 export default connect(mapStateToProps)(withRouter(App));

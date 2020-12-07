@@ -4,8 +4,9 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 800;
+  z-index: 900;
   background-color: black;
   opacity: 0.5;
   cursor: pointer;
+  overflow: hidden;
 }

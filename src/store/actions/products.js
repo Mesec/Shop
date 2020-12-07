@@ -30,7 +30,6 @@ export const getProducts = () => {
         dispatch(getProductsSuccess(products.data.products));
       })
       .catch((err) => {
-        console.log(err.response);
         dispatch(getProductsFailed());
       });
   };
@@ -101,7 +100,6 @@ export const addProduct = (productData) => {
         dispatch(getProducts());
       })
       .catch((err) => {
-        console.log(err.response.data.oldData);
         dispatch(
           addProductFailed(
             err.response.data.errors.errors,
@@ -170,7 +168,7 @@ export const updProdHideModal = () => {
   };
 };
 
-// DETELE PRODUCT
+// DELETE PRODUCT
 export const deleteProductStart = () => {
   return {
     type: actionTypes.DELETE_PRODUCT_START,
@@ -222,7 +220,7 @@ export const disableErrors = () => {
   };
 };
 
-//Side drawer
+//Side drawer actions
 export const showSideDrawer = () => {
   return {
     type: actionTypes.SHOW_SIDE_DRAWER,

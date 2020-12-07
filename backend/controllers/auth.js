@@ -59,7 +59,6 @@ exports.createUser = (req, res, next) => {
         user
           .save()
           .then((response) => {
-            console.log("user Added");
             res.status(200).json(response);
           })
           .catch((err) => {

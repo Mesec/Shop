@@ -1,30 +1,31 @@
 import React from "react";
-import classes from "./Sidebar.module.css";
+import classes from "./SideDrawer.module.css";
 import { connect } from "react-redux";
-import * as productActions from "../../store/actions/products";
+import * as actions from "../../store/actions/products";
 
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Backdrop from "../Backdrop/Backdrop";
 
 const sideDrawer = (props) => {
-  console.log(props);
-
   const sideDrawerClasses = [
     classes.SideDrawer,
     props.showSideDrawer ? classes.SideDrawerVisible : classes.SideDrawerHidden,
   ];
+
   return (
     <Container fluid className={sideDrawerClasses.join(" ")}>
       <Card className={classes.Card}>
         <Card.Header className={classes.Header}>
-          <h4 className={classes.Banner}>Online-Shop</h4>
-          <h3 onClick={props.hideSideDrawerHandler} className={classes.Close}>
+          <h5 className={classes.Banner}>Online-Shop</h5>
+          <h3 className={classes.Close} onClick={props.hideSideDrawerHandler}>
             x
           </h3>
         </Card.Header>
         <Card.Body className={classes.Body}>
-          <h5 className={classes.Categories}>Categories</h5>
+          <div className={classes.Categories}>
+            <h6>Categories</h6>
+          </div>
           <div className={classes.Category}>
             <h6>Laptops</h6>
             <h6>Telephones</h6>
@@ -33,19 +34,20 @@ const sideDrawer = (props) => {
           </div>
         </Card.Body>
       </Card>
+      {props.children}
     </Container>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
-    showSideDrawer: state.products.isSideDrawerShown,
+    showSideDrawer: state.products.showSideDrawer,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    hideSideDrawerHandler: () => dispatch(productActions.hideSideDrawer()),
+    hideSideDrawerHandler: () => dispatch(actions.hideSideDrawer()),
   };
 };
 

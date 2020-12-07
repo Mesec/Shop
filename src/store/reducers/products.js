@@ -18,7 +18,7 @@ const initialState = {
   productToUpdate: null,
   productToDelete: null,
   isProductAdded: false,
-  isSideDrawerShown: false,
+  showSideDrawer: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -174,12 +174,12 @@ const reducer = (state = initialState, action) => {
     case actionTypes.SHOW_SIDE_DRAWER:
       return {
         ...state,
-        isSideDrawerShown: true,
+        showSideDrawer: true,
       };
     case actionTypes.HIDE_SIDE_DRAWER:
       return {
         ...state,
-        isSideDrawerShown: false,
+        showSideDrawer: false,
       };
     default:
       return state;

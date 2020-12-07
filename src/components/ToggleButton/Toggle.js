@@ -1,12 +1,12 @@
 import React from "react";
 import classes from "./Toggle.module.css";
-import { showSideDrawer } from "../../store/actions/products";
 import { connect } from "react-redux";
+import * as actions from "../../store/actions/products";
 
 const toggle = (props) => {
   return (
-    <div className={classes.ToggleContainer}>
-      <div className={classes.Toggle} onClick={props.showSideBarHandler}>
+    <div className={classes.ToggleContainer} onClick={props.showSideBarHandler}>
+      <div className={classes.Toggle}>
         <div></div>
         <div></div>
         <div></div>
@@ -17,7 +17,7 @@ const toggle = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    showSideBarHandler: () => dispatch(showSideDrawer()),
+    showSideBarHandler: () => dispatch(actions.showSideDrawer()),
   };
 };
 

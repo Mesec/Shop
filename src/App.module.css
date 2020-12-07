@@ -2,3 +2,9 @@
   height: 100%;
   padding: 0;
 }
+.NoScroll {
+  overflow: hidden;
+}
+.WithScroll {
+  overflow: visible;
+}

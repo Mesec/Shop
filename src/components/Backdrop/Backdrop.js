@@ -1,27 +1,23 @@
 import React from "react";
 import classes from "./Backdrop.module.css";
-import * as productActions from "../../store/actions/products";
 import { connect } from "react-redux";
+import * as actions from "../../store/actions/products";
 
 const backdrop = (props) => {
-  console.log(props);
   return (
-    <div
-      onClick={props.hideSideDrawerHandler}
-      className={classes.Backdrop}
-    ></div>
+    <div className={classes.Backdrop} onClick={props.hideSideDrawerHandler}>
+      {props.children}
+    </div>
   );
 };
 
 const mapStateToProps = (state) => {
-  return {
-    showSideDrawer: state.products.isSideDrawerShown,
-  };
+  return {};
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    hideSideDrawerHandler: () => dispatch(productActions.hideSideDrawer()),
+    hideSideDrawerHandler: () => dispatch(actions.hideSideDrawer()),
   };
 };
 

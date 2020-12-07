@@ -100,7 +100,6 @@ exports.updateProduct = (req, res, next) => {
 exports.deleteProduct = (req, res, next) => {
   Product.findOneAndRemove({ _id: req.body._id })
     .then((result) => {
-      console.log("product Deleted");
       res.status(200).json(result);
     })
     .catch((err) => {

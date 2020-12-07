@@ -52,7 +52,7 @@ class AdminProducts extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     products: state.products.products,
     loading: state.products.loading,
@@ -60,9 +60,9 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispactch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    getProductsHandler: () => dispactch(actions.getProducts()),
+    getProductsHandler: () => dispatch(actions.getProducts()),
   };
 };
 
