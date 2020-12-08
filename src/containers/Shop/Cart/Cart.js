@@ -1,146 +1,97 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import * as cartActions from "../../../store/actions/cart";
 import classes from "./Cart.module.css";
 import { withRouter } from "react-router";
 
 import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
 import Table from "react-bootstrap/Table";
+import TableBody from "../../../components/CartTableBody/CartTableBody";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Spinner from "../../../components/Spinner/Spinner";
 import Modal from "../../../components/Modal/OrderModal";
 
-class Cart extends Component {
-  state = {
-    isCartCleaned: true,
-  };
+const Cart = (props) => {
+  useEffect(() => {
+    props.getCartProducts();
+  }, []);
 
-  componentDidMount() {
-    this.props.getCartProducts();
-  }
+  let cart;
 
-  render() {
-    let cart = <Spinner />;
-    let total = 0;
-
-    if (this.props.products.length > 0 && !this.props.loading) {
-      cart = (
-        <div>
-          <div className={classes.Controls}>
-            <button onClick={this.props.getCartProducts}>Refresh</button>
-            <button onClick={() => this.props.history.push("/")}>
-              Back to Shop
-            </button>
-          </div>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>Product Name</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Vat</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.props.products.map((product) => {
-                return (
-                  <tr key={product._id}>
-                    <td>
-                      <div>
-                        <img
-                          style={{ width: "40px", marginRight: "10px" }}
-                          src={product.productId.image}
-                          alt=""
-                        />{" "}
-                        {product.productId.name}
-                      </div>
-                    </td>
-                    <td>${product.productId.price}</td>
-                    <td>{product.quantity}</td>
-                    <td>${0.2 * product.productId.price}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </Table>
-          <Card style={{ width: "20rem" }}>
-            <Card.Body>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <p style={{ fontSize: "0.9em" }}>Total:</p>
-                <p style={{ fontSize: "0.9em" }}>${this.props.total}</p>
-              </div>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <p style={{ fontSize: "0.9em" }}>Vat:</p>
-                <p style={{ fontSize: "0.9em" }}>
-                  ${this.props.pdv.toFixed(2)}
-                </p>
-              </div>
-              <hr />
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  marginBottom: "10px",
-                }}
-              >
-                <Card.Title style={{ fontSize: "1em" }}>
-                  All Together
-                </Card.Title>
-                <Card.Title style={{ fontSize: "1em", margin: 0 }}>
-                  $ {this.props.totalPrice.toFixed(2)}
-                </Card.Title>
-              </div>
-
+  if (props.products.length > 0 && !props.loading) {
+    cart = (
+      <Row>
+        <div className={classes.Controls}>
+          <Button onClick={props.getCartProducts}>Refresh</Button>
+          <Button onClick={() => props.history.push("/")}>Back to Shop</Button>
+        </div>
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Vat</th>
+            </tr>
+          </thead>
+          <TableBody />
+        </Table>
+        <Card className={classes.Cart}>
+          <Card.Body className={classes.CartBody}>
+            <Col className={classes.Price}>
+              <p>Total:</p>
+              <p>${props.total}</p>
+            </Col>
+            <Col
+              className={classes.Price}
+              style={{ display: "flex", justifyContent: "space-between" }}
+            >
+              <p>Vat:</p>
+              <p>${props.pdv.toFixed(2)}</p>
+            </Col>
+            <hr />
+            <Col className={classes.TotalPrice}>
+              <h6>All Together</h6>
+              <h6>$ {props.totalPrice.toFixed(2)}</h6>
+            </Col>
+            <Col className={classes.PurchaseActions}>
               <Button
-                onClick={this.props.showModalHandler}
-                style={{ width: "100%" }}
+                onClick={props.showModalHandler}
                 variant="primary"
                 size="sm"
               >
                 Order
               </Button>
-              <Button
-                onClick={this.props.clearCart}
-                style={{ width: "100%", marginTop: "10px" }}
-                variant="primary"
-                size="sm"
-              >
+              <Button onClick={props.clearCart} variant="danger" size="sm">
                 Delete
               </Button>
-            </Card.Body>
-          </Card>
-        </div>
-      );
-    }
-    if (this.props.products.length === 0 && !this.props.loading) {
-      cart = (
-        <div className={classes.Empty}>
-          <h3>The Cart is Empty</h3>
-        </div>
-      );
-    }
-    return (
-      <Container style={{ padding: "50px 0px 50px 20px" }}>
-        {this.props.loading ? (
-          <div
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-            }}
-          >
-            <Spinner />
-          </div>
-        ) : (
-          cart
-        )}
-        <Modal />
-      </Container>
+            </Col>
+          </Card.Body>
+        </Card>
+      </Row>
     );
   }
-}
+  if (props.products.length === 0 && !props.loading) {
+    cart = (
+      <div className={classes.Empty}>
+        <h3>The Cart is Empty</h3>
+      </div>
+    );
+  }
+  if (props.loading) {
+    cart = <Spinner />;
+  }
+  return (
+    <Container className={classes.Container}>
+      {cart}
+      <Modal />
+    </Container>
+  );
+};
 const mapStateToProps = (state) => {
   return {
     products: state.cart.cartProducts,

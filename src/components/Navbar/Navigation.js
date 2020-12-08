@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+import * as authActions from "../../store/actions/auth";
 
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavItem from "react-bootstrap/NavItem";
 import ToggleButton from "../ToggleButton/Toggle";
 
-const navigation = (props) => {
-  let token = localStorage.getItem("token");
-
+const Navigation = (props) => {
+  const token = localStorage.getItem("token");
   return (
     <Navbar bg="primary" variant="dark" expand="md">
       <ToggleButton />
@@ -53,6 +54,7 @@ const navigation = (props) => {
             </NavItem>
           ) : null}
         </Nav>
+
         <Nav>
           <Navbar.Collapse>
             {!token ? (
@@ -73,7 +75,7 @@ const navigation = (props) => {
                 <Nav.Link
                   as={NavLink}
                   to="/login"
-                  onClick={props.logoutHandler}
+                  onClick={props.logoutUserHandler}
                 >
                   Logout
                 </Nav.Link>
@@ -86,4 +88,16 @@ const navigation = (props) => {
   );
 };
 
-export default navigation;
+const mapStateToProps = (state) => {
+  return {
+    isAuth: state.auth.isAuthenticated,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logoutUserHandler: () => dispatch(authActions.logoutUser()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

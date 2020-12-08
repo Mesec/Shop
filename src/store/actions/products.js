@@ -100,14 +100,15 @@ export const addProductFailed = (errors, oldData) => {
   };
 };
 
-export const addProduct = (productData) => {
+export const addProduct = (data) => {
   return (dispatch) => {
     dispatch(addProductStart());
     axios
-      .post("http://localhost:5000/products/add-product", productData)
+      .post("http://localhost:5000/products/add-product", data.productData)
       .then((response) => {
         dispatch(addProductSuccess());
         dispatch(getProducts());
+        data.history.push("/admin/products");
       })
       .catch((err) => {
         dispatch(

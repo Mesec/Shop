@@ -19,6 +19,7 @@ export const addToCartFailed = () => {
   };
 };
 export const addToCart = (cartData) => {
+  console.log(cartData);
   return (dispatch) => {
     dispatch(addToCartStart());
     axios

@@ -26,7 +26,7 @@ const sideDrawer = (props) => {
           }}
           key={type}
         >
-          {type}
+          {type}s
         </h6>
       );
     });

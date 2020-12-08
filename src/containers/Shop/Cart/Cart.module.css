@@ -1,8 +1,14 @@
 .Container {
   width: 100%;
   height: 100%;
-  background-color: red;
   padding: 50px 0 50px 20px;
+}
+.Cart {
+  width: 20em;
+}
+.CartBody {
+  padding-left: 3px;
+  padding-right: 3px;
 }
 .Controls {
   width: 100%;
@@ -21,4 +27,30 @@
 }
 .Empty {
   text-align: center;
+}
+.Price {
+  display: flex;
+  justify-content: space-between;
+}
+.Price p {
+  font-size: 0.9em;
+}
+.TotalPrice {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.PurchaseActions button {
+  width: 100%;
+}
+.PurchaseActions button:nth-child(2) {
+  margin-top: 6px;
+}
+.Body {
+  display: flex;
+  justify-content: space-between;
+}
+.Body:nth-child(1),
+.Body:nth-child(2) {
+  font-size: 0.9em;
 }

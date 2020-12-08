@@ -78,7 +78,6 @@ export const loginUser = (data) => {
         }
       })
       .catch((error) => {
-        console.log(error);
         dispatch(loginUserFailed(error.response.data.errors.errors));
       });
   };

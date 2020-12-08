@@ -33,7 +33,9 @@ const productCard = (props) => {
                 <h5>{product.name}</h5>
               </div>
               <div className={classes.Price}>
-                {props.path === "/" ? <h4>${product.price}</h4> : null}
+                {props.path === "/" || props.history.location.search ? (
+                  <h4>${product.price}</h4>
+                ) : null}
               </div>
               {props.path === "/" || props.history.location.search !== "" ? (
                 <div className={classes.ButtonContainerUser}>

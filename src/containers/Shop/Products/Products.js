@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions/products";
@@ -6,60 +6,44 @@ import classes from "./Products.module.css";
 
 import ProductCard from "../../../components/ProductCard/ProductCard";
 import Spinner from "../../../components/Spinner/Spinner";
+import Container from "react-bootstrap/Container";
 
-class Products extends Component {
-  state = {
-    path: null,
-  };
-  componentDidMount() {
-    const query = new URLSearchParams(this.props.location.search);
-    let productId;
+const Products = (props) => {
+  const [path, changePath] = useState(null);
 
+  useEffect(() => {
+    changePath(props.history.location.pathname);
+    const query = new URLSearchParams(props.location.search);
+    let queryParam;
     for (let param of query.entries()) {
-      productId = param[0];
+      queryParam = param[0];
     }
-    this.setState({ path: this.props.history.location.pathname });
-
-    if (this.props.history.location.search === "") {
-      this.props.getProductsHandler();
+    if (queryParam === "") {
+      props.getProductsHandler();
     } else {
-      this.props.getProductsHandler(productId);
+      props.getProductsHandler(queryParam);
     }
-  }
-  setQueryParamsForProductDetail = (productId) => {
-    this.props.history.push({
+  }, []);
+
+  const setQueryParamsForProductDetail = (productId) => {
+    props.history.push({
       pathname: "/product",
       search: "?" + productId,
     });
   };
-  render() {
-    return (
-      <div className={classes.Container}>
-        {this.props.loading ? (
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-            }}
-          >
-            <Spinner />
-          </div>
-        ) : (
-          <ProductCard
-            products={this.props.products}
-            path={this.state.path}
-            click={this.setQueryParamsForProductDetail}
-          />
-        )}
-      </div>
-    );
+
+  let cart = (
+    <ProductCard
+      products={props.products}
+      path={path}
+      click={setQueryParamsForProductDetail}
+    />
+  );
+  if (props.loading) {
+    cart = <Spinner />;
   }
-}
+  return <Container className={classes.Container}>{cart}</Container>;
+};
 
 const mapStateToProps = (state) => {
   return {

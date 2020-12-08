@@ -1,56 +1,35 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions/products";
+import classes from "./AdminProducts.module.css";
 
+import Container from "react-bootstrap/Container";
 import ProductCard from "../../../components/ProductCard/ProductCard";
 import Spinner from "../../../components/Spinner/Spinner";
 import EditProductModal from "../../../components/Modal/EditProductModal";
 import DeleteProductModal from "../../../components/Modal/DeleteProductModal";
 
-class AdminProducts extends Component {
-  state = {
-    product: {
-      name: "",
-      type: "",
-      image: "",
-      amount: "",
-      price: "",
-      description: "",
-    },
-    path: null,
-  };
-  componentDidMount() {
-    this.setState({ path: this.props.history.location.pathname });
-    this.props.getProductsHandler();
+const AdminProducts = (props) => {
+  const [path, changePath] = useState(null);
+
+  useEffect(() => {
+    changePath(props.history.location.pathname);
+    props.getProductsHandler();
+  }, []);
+
+  let products = <Spinner />;
+  if (!props.loading) {
+    products = <ProductCard products={props.products} path={path} />;
   }
-  render() {
-    let products = (
-      <div
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-        }}
-      >
-        <Spinner />
-      </div>
-    );
-    if (!this.props.loading) {
-      products = (
-        <ProductCard products={this.props.products} path={this.state.path} />
-      );
-    }
-    return (
-      <div style={{ padding: "50px 0px 50px 20px" }}>
-        <EditProductModal />
-        <DeleteProductModal />
-        {products}
-      </div>
-    );
-  }
-}
+  return (
+    <Container className={classes.Container}>
+      <EditProductModal />
+      <DeleteProductModal />
+      {products}
+    </Container>
+  );
+};
 
 const mapStateToProps = (state) => {
   return {

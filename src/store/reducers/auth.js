@@ -64,7 +64,6 @@ const reducer = (state = initialState, action) => {
       };
     //Login controls
     case actionTypes.LOGIN_CHANGE_HANDLER:
-      console.log("sssss");
       const loginDataCopy = { ...state.loginData };
       Object.keys(loginDataCopy).forEach((item) => {
         if (item === action.event.target.name) {
@@ -86,11 +85,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         loading: false,
         errors: false,
-        isAuthenticated: true,
         loginData: {
           email: "",
           password: "",
         },
+        isAuthenticated: true,
       };
     case actionTypes.LOGIN_USER_FAILED:
       return {

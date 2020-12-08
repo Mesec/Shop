@@ -9,10 +9,15 @@ import Backdrop from "../../components/Backdrop/Backdrop";
 const layout = (props) => {
   const backdrop = props.showSideDrawer ? <Backdrop /> : null;
 
+  //Disabling scroll when side drawer is shown
+  document.getElementsByTagName("BODY")[0].className = props.showSideDrawer
+    ? classes.NoScroll
+    : classes.WithScroll;
+
   return (
     <div className={classes.Layout}>
       <header className={classes.Header}>
-        <Navigation isAuth={props.isAuth} logoutHandler={props.logoutHandler} />
+        <Navigation isAuth={props.isAuth} />
         {backdrop}
         <SideDrawer />
       </header>
