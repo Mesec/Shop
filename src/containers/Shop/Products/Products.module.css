@@ -1,3 +1,43 @@
 .Container {
-  padding: 50px 0 20px 20px;
+  margin: 50px auto 20px auto;
+  padding: 0;
+}
+.Controls {
+  width: 100%;
+  background-color: #17a2b8;
+  height: 33px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.Categories {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 13%;
+  padding-left: 4px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+.Controls p {
+  margin: 0;
+  padding: 0;
+  color: white;
+  text-transform: uppercase;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-right: 10px;
+}
+.Controls input {
+  padding: 0;
+  padding-left: 4px;
+}
+.Products {
+  margin: 0;
+  padding-top: 30px;
+  /* border-left: 1px solid #ccc; */
+  border-right: 1px solid #ccc;
+  /* background-color: #ddf0f3; */
 }

@@ -21,8 +21,12 @@ export const purchaseFailed = (errors) => {
 };
 export const purchase = (purchaseData, cartData, totalPrice) => {
   const cartProducts = [];
+  const quantity = [];
+
+  console.log(cartData);
   cartData.forEach((item) => {
-    cartProducts.push(item);
+    cartProducts.push(item.productId);
+    quantity.push({ qty: item.quantity, prodId: item.productId._id });
   });
   return (dispatch) => {
     dispatch(purchaseStart());
@@ -32,6 +36,7 @@ export const purchase = (purchaseData, cartData, totalPrice) => {
         address: purchaseData.address,
         phone: purchaseData.phone,
         cartProducts: cartProducts,
+        quantity: quantity,
         totalPrice: totalPrice,
       })
       .then((result) => {

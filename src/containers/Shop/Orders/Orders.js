@@ -22,7 +22,7 @@ const Orders = (props) => {
             <h6 style={{ margin: "0", padding: "0" }}>23.04.2020</h6>
           </Card.Header>
           <Card.Body>
-            <Table striped bordered hover size="sm">
+            <Table className={classes.Table} striped bordered hover size="sm">
               <thead>
                 <tr>
                   <th>First Name</th>
@@ -38,8 +38,8 @@ const Orders = (props) => {
                 </tr>
               </tbody>
             </Table>
-            <hr />
-            <Table striped bordered hover size="sm">
+            {/* <hr /> */}
+            <Table className={classes.Table} striped bordered hover size="sm">
               <thead>
                 <tr>
                   <th>Product Name</th>
@@ -52,10 +52,10 @@ const Orders = (props) => {
                 {order.products.map((product) => {
                   return (
                     <tr>
-                      <td>{product.productId.name}</td>
-                      <td>{product.productId.price}</td>
+                      <td>{product.name}</td>
+                      <td>{product.price}</td>
                       <td>{product.quantity}</td>
-                      <td>${product.productId.price}</td>
+                      <td>${product.price}</td>
                     </tr>
                   );
                 })}
@@ -64,7 +64,7 @@ const Orders = (props) => {
           </Card.Body>
           <Card.Footer className={classes.Footer}>
             <p className={classes.TotalPrice}>
-              Total Price: ${order.totalPrice}
+              Total Price: $ {order.totalPrice}
             </p>
           </Card.Footer>
         </Card>
@@ -72,7 +72,7 @@ const Orders = (props) => {
     });
   }
 
-  return <Container className={classes.Container}> {orders}</Container>;
+  return <Container className={classes.Container}>{orders}</Container>;
 };
 
 const mapStateToProps = (state) => {

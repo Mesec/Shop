@@ -7,7 +7,7 @@ const orderSchema = new Schema({
   fullName: { type: String, required: true },
   address: { type: String, required: true },
   phone: { type: Number, required: true },
-  products: [{ type: Object, requred: true }],
+  products: [{ type: Object, required: true }],
   totalPrice: { type: Number, required: true },
 });
 

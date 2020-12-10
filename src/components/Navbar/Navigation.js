@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import * as authActions from "../../store/actions/auth";
 
+import classes from "./Navbar.module.css";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavItem from "react-bootstrap/NavItem";
@@ -11,7 +12,7 @@ import ToggleButton from "../ToggleButton/Toggle";
 const Navigation = (props) => {
   const token = localStorage.getItem("token");
   return (
-    <Navbar bg="primary" variant="dark" expand="md">
+    <Navbar bg="info" variant="dark" expand="md" className={classes.Navbar}>
       <ToggleButton />
 
       <Navbar.Brand as={NavLink} to="/">

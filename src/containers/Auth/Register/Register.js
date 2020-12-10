@@ -86,7 +86,7 @@ const Login = (props) => {
       </Form.Group>
       <Button
         className={classes.Button}
-        variant="primary"
+        variant="info"
         type="submit"
         onClick={() =>
           props.registerUserHandler({

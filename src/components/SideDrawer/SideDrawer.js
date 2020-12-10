@@ -36,15 +36,12 @@ const sideDrawer = (props) => {
     <Container fluid className={sideDrawerClasses.join(" ")}>
       <Card className={classes.Card}>
         <Card.Header className={classes.Header}>
-          <h5 className={classes.Banner}>Online-Shop</h5>
+          <h5 className={classes.Banner}>Categories</h5>
           <h3 className={classes.Close} onClick={props.hideSideDrawer}>
             x
           </h3>
         </Card.Header>
         <Card.Body className={classes.Body}>
-          <div className={classes.Categories}>
-            <h6>Categories</h6>
-          </div>
           <div className={classes.Category}>{types}</div>
         </Card.Body>
       </Card>

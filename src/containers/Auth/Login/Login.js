@@ -52,7 +52,7 @@ const Login = (props) => {
         </p>
       </Form.Group>
       <Button
-        variant="primary"
+        variant="info"
         type="submit"
         className={classes.Button}
         onClick={(event) =>

@@ -59,11 +59,7 @@ const Cart = (props) => {
               <h6>$ {props.totalPrice.toFixed(2)}</h6>
             </Col>
             <Col className={classes.PurchaseActions}>
-              <Button
-                onClick={props.showModalHandler}
-                variant="primary"
-                size="sm"
-              >
+              <Button onClick={props.showModalHandler} variant="info" size="sm">
                 Order
               </Button>
               <Button onClick={props.clearCart} variant="danger" size="sm">

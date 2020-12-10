@@ -6,28 +6,19 @@
   display: flex;
   justify-content: center;
 }
-.Col {
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.CardsContainer {
-  display: flex;
-  flex-direction: row;
-  background-color: red;
-}
+
 .Card {
   height: 280px;
   width: 14rem;
   text-align: center;
   padding-top: 10px;
   margin-bottom: 35px;
-  box-shadow: 0px 1px 3px rgb(197, 195, 195);
   overflow: hidden;
+  border-radius: 0;
+  position: relative;
 }
 .Card:hover {
-  box-shadow: 0px 1px 4px rgb(126, 124, 124);
+  box-shadow: 0px 0px 15px 0px rgb(126, 124, 124);
 }
 .ImageContainer {
   width: 100%;
@@ -57,6 +48,7 @@
   padding-left: 10px;
   padding-right: 5px;
   margin-top: 10px;
+  font-size: 0.9em;
 }
 .Header h5 {
   font-size: 0.9em;

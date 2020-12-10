@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 
 import Products from "../../containers/Shop/Products/Products";
 import AddProduct from "../../containers/Admin/AddProduct/AddProduct";
@@ -10,13 +11,7 @@ import Register from "../../containers/Auth/Register/Register";
 import Cart from "../../containers/Shop/Cart/Cart";
 import Orders from "../../containers/Shop/Orders/Orders";
 
-const routes = () => {
-  let isAuth;
-  if (localStorage.getItem("token")) {
-    isAuth = true;
-  } else {
-    isAuth = false;
-  }
+const Routes = (props) => {
   return (
     <Switch>
       <Route path="/" exact component={() => <Products />} />
@@ -25,7 +20,7 @@ const routes = () => {
       <Route path="/cart" component={() => <Cart />} />
       <Route path="/login" component={() => <Login />} />
       <Route path="/register" component={() => <Register />} />
-      {isAuth ? (
+      {localStorage.getItem("token") ? (
         <div>
           <Route
             path="/admin/products"
@@ -46,4 +41,10 @@ const routes = () => {
   );
 };
 
-export default routes;
+const mapStateToProps = (state) => {
+  return {
+    isAuth: state.auth.isAuthenticated,
+  };
+};
+
+export default connect(mapStateToProps)(Routes);

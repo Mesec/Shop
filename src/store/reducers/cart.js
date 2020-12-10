@@ -8,7 +8,7 @@ const initialState = {
   total: 0,
   totalPrice: 0,
   pdv: 0,
-  isUserAuth: false,
+  // isUserAuth: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -51,13 +51,13 @@ const reducer = (state = initialState, action) => {
         total: total,
         pdv: pdv,
         totalPrice: totalPrice,
-        isUserAuth: true,
+        // isUserAuth: true,
       };
     case actionTypes.GET_CART_PRODUCTS_FAILED:
       return {
         ...state,
         loading: false,
-        isUserAuth: action.isAuth,
+        // isUserAuth: action.isAuth,
       };
 
     //Clear the Cart

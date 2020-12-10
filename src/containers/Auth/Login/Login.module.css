@@ -3,7 +3,7 @@
 }
 .Header {
   text-align: left;
-  background-color: #007bff;
+  background-color: #17a2b8;
   position: absolute;
   top: 0;
   left: 0;
@@ -45,7 +45,6 @@
   font-size: 0.8em;
   padding-top: 2px;
   height: 20px;
-  color: red;
   margin: 0;
 }
 

@@ -13,7 +13,7 @@ const initialState = {
   },
   errors: false,
   loading: false,
-  isAuthenticated: false,
+  isAuthenticated: localStorage.getItem("token"),
   isUserRegistered: false,
 };
 

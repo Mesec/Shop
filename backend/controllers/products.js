@@ -3,7 +3,6 @@ const { validationResult } = require("express-validator");
 
 //    ****GET ALL PRODUCTS FROM DB****
 exports.getProducts = (req, res, next) => {
-  console.log(req.body.type);
   Product.find()
     .then((products) => {
       let types = [];

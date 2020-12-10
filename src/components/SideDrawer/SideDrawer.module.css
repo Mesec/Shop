@@ -30,8 +30,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #007bff;
-  height: 64px;
+  background-color: #17a2b8;
+  height: 54px;
   padding: 0;
 }
 .Header h5 {
@@ -45,7 +45,9 @@
   color: white;
   padding-right: 17px;
 }
-
+.Close:hover {
+  color: #dc3545;
+}
 .Banner {
   color: white;
   cursor: pointer;
@@ -53,39 +55,27 @@
 .Body {
   height: 100%;
   padding: 0;
-  margin-top: 10px;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
-.Categories {
-  margin: 0;
-  font-size: 1.1em;
-  padding: 2px 4px 0 10px;
-  margin-bottom: 8px;
+.Category {
   margin-top: 10px;
-  text-align: left;
-}
-.Categories h6 {
-  font-size: 1em;
-  text-transform: uppercase;
-  border-bottom: 1px solid gray;
-  padding-bottom: 6px;
-  width: 50%;
-  font-weight: bolder;
 }
 .Category h6 {
   margin: 0;
   font-weight: normal;
-  padding: 13px 0 13px 20px;
   width: 100%;
+  padding: 7px 0 7px 16px;
   font-weight: normal;
   cursor: pointer;
   transition: all ease-in 0.2s;
   text-transform: capitalize;
+  font-size: 1em;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  margin-bottom: 2px;
 }
 
 .Category h6:hover {
   background-color: rgb(231, 226, 226);
-  font-weight: bold;
 }
 @media (max-width: 767px) {
   .SideDrawer {

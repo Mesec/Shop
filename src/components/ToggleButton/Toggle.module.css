@@ -2,8 +2,8 @@
   border: 1px solid rgba(255, 255, 255, 0.24);
   border-radius: 4px;
   padding: 10px;
-  margin-right: 20px;
   cursor: pointer;
+  margin-right: 10px;
 }
 .Toggle {
   width: 24px;
@@ -12,7 +12,8 @@
   transform: scale(1);
   transition: transform 0.1s ease;
 }
-.Toggle:active {
+.Toggle:active,
+.Toggle:hover {
   transform: scale(0.95);
 }
 .Toggle div {

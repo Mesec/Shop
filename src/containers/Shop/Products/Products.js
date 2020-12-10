@@ -42,7 +42,11 @@ const Products = (props) => {
   if (props.loading) {
     cart = <Spinner />;
   }
-  return <Container className={classes.Container}>{cart}</Container>;
+  return (
+    <Container fluid className={classes.Container}>
+      {cart}
+    </Container>
+  );
 };
 
 const mapStateToProps = (state) => {

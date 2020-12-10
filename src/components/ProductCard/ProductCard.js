@@ -34,7 +34,7 @@ const productCard = (props) => {
               </div>
               <div className={classes.Price}>
                 {props.path === "/" || props.history.location.search ? (
-                  <h4>${product.price}</h4>
+                  <h4>${product.price.toFixed(2)}</h4>
                 ) : null}
               </div>
               {props.path === "/" || props.history.location.search !== "" ? (
@@ -43,7 +43,7 @@ const productCard = (props) => {
                     size="sm"
                     onClick={() => props.click(product._id)}
                     className={classes.Button}
-                    variant="primary"
+                    variant="info"
                   >
                     Details
                   </Button>
@@ -53,7 +53,7 @@ const productCard = (props) => {
                   <Button
                     size="sm"
                     className={classes.Button}
-                    variant="primary"
+                    variant="info"
                     onClick={() => props.updProdShowModalHandler(product)}
                   >
                     Edit
@@ -61,7 +61,7 @@ const productCard = (props) => {
                   <Button
                     size="sm"
                     className={classes.Button}
-                    variant="primary"
+                    variant="info"
                     onClick={() => props.delProdShowModalHandler(product)}
                   >
                     Delete

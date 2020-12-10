@@ -32,6 +32,7 @@ const ProductDetail = (props) => {
           </div>
         ) : (
           <Card className={classes.Card}>
+            <div className={classes.Controls}></div>
             <Card.Header>
               <h5>{props.product ? props.product.name : null}</h5>
               <p className={classes.ID}>
@@ -51,8 +52,14 @@ const ProductDetail = (props) => {
               </div>
               <Card.Body className={classes.RightSide}>
                 <div>
-                  <h6>
-                    In stock: {props.product ? props.product.amount : null}
+                  <h6
+                    style={
+                      props.product && !props.product.amount
+                        ? { color: "#d60000" }
+                        : { color: "black" }
+                    }
+                  >
+                    IN STOCK: {props.product ? props.product.amount : null}
                   </h6>
                   <h6>Price: ${props.product ? props.product.price : null}</h6>
                 </div>
@@ -61,16 +68,31 @@ const ProductDetail = (props) => {
             </div>
             <Card.Footer>
               <div className={classes.AddToCartActions}>
-                <span>{props.quantity}</span>
+                <span>
+                  {props.product && !props.product.amount ? 0 : props.quantity}
+                </span>
                 <div className={classes.Buttons}>
                   <Button
+                    className={classes.ActionButtons}
+                    variant="info"
+                    disabled={props.product && !props.product.amount}
                     onClick={() => props.increaseQuantity(props.product.amount)}
                   >
                     +
                   </Button>
-                  <Button onClick={props.decreaseQuantity}>-</Button>
+                  <Button
+                    className={classes.ActionButtons}
+                    variant="info"
+                    disabled={props.product && !props.product.amount}
+                    onClick={props.decreaseQuantity}
+                  >
+                    -
+                  </Button>
                 </div>
                 <Button
+                  className={classes.ActionButtons}
+                  variant="info"
+                  disabled={props.product && !props.product.amount}
                   onClick={() => {
                     localStorage.getItem("token")
                       ? props.addToCartHandler({
@@ -87,6 +109,9 @@ const ProductDetail = (props) => {
                   }}
                 >
                   Add to Cart
+                </Button>
+                <Button className={classes.GoBackButton} variant="danger">
+                  Go Back
                 </Button>
               </div>
             </Card.Footer>

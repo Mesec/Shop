@@ -133,7 +133,7 @@ const AddProduct = (props) => {
       </Form.Group>
       <Button
         className={classes.Button}
-        variant="primary"
+        variant="info"
         type="submit"
         onClick={() =>
           props.addProductHandler({
