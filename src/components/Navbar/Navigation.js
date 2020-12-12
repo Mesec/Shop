@@ -13,7 +13,7 @@ const Navigation = (props) => {
   const token = localStorage.getItem("token");
   return (
     <Navbar bg="info" variant="dark" expand="md" className={classes.Navbar}>
-      <ToggleButton />
+      {/* <ToggleButton /> */}
 
       <Navbar.Brand as={NavLink} to="/">
         Online-Shop

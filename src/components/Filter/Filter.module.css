@@ -1,0 +1,56 @@
+.Filter {
+  /* height: 100%; */
+  width: 28%;
+  padding: 10px 0 0px 0px;
+  background-color: #17a2b8;
+  min-height: 100vh;
+}
+.Header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-right: 10px;
+  padding-left: 10px;
+  margin-bottom: 20px;
+}
+.Header input {
+  height: 25px;
+  font-size: 0.9em;
+  padding: 0 0 2px 4px;
+  width: 100%;
+  margin-top: 10px;
+}
+.Container {
+  margin-bottom: 20px;
+  padding-left: 10px;
+}
+.Container hr {
+  background-color: white;
+  margin: 8px 0 8px 0;
+}
+.Container h6 {
+  color: white;
+}
+.Actions {
+  display: flex;
+  align-items: center;
+}
+.Actions input {
+  margin-right: 10px;
+  cursor: pointer;
+}
+.Actions label {
+  position: relative;
+  top: 4px;
+  font-size: 0.9em;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  color: white;
+  /* color: #17a2b8; */
+}
+
+/* @media (max-width: 767px) {
+  .Filter {
+    display: none;
+  }
+} */

@@ -2,6 +2,7 @@ import * as actionTypes from "../actions/actionsTypes";
 
 const initialState = {
   products: null,
+  filteredProducts: null,
   productTypes: null,
   product: null,
   productData: {
@@ -34,6 +35,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         products: action.products,
+        filteredProducts: action.products,
         loading: false,
         errors: false,
         product: null,
@@ -182,6 +184,18 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         showSideDrawer: false,
+      };
+    //Filtering products reducers
+    case actionTypes.SEARCH_FOR_PRODUCT:
+      const products = state.products;
+      let filteredProducts = products.filter((item) => {
+        return item.name
+          .toUpperCase()
+          .includes(action.event.target.value.toUpperCase(), 0);
+      });
+      return {
+        ...state,
+        filteredProducts: filteredProducts,
       };
     default:
       return state;

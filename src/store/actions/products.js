@@ -242,3 +242,13 @@ export const hideSideDrawer = () => {
     type: actionTypes.HIDE_SIDE_DRAWER,
   };
 };
+
+// Filtering actions
+
+export const searchForProduct = (event, products) => {
+  return {
+    type: actionTypes.SEARCH_FOR_PRODUCT,
+    event: event,
+    products: products,
+  };
+};

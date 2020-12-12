@@ -110,7 +110,11 @@ const ProductDetail = (props) => {
                 >
                   Add to Cart
                 </Button>
-                <Button className={classes.GoBackButton} variant="danger">
+                <Button
+                  className={classes.GoBackButton}
+                  variant="danger"
+                  onClick={props.history.goBack}
+                >
                   Go Back
                 </Button>
               </div>

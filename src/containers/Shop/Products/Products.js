@@ -7,6 +7,8 @@ import classes from "./Products.module.css";
 import ProductCard from "../../../components/ProductCard/ProductCard";
 import Spinner from "../../../components/Spinner/Spinner";
 import Container from "react-bootstrap/Container";
+import ToggleBtn from "../../../components/ToggleButton/Toggle";
+import Filter from "../../../components/Filter/Filter";
 
 const Products = (props) => {
   const [path, changePath] = useState(null);
@@ -32,26 +34,31 @@ const Products = (props) => {
     });
   };
 
-  let cart = (
-    <ProductCard
-      products={props.products}
-      path={path}
-      click={setQueryParamsForProductDetail}
-    />
+  let products = (
+    <main className={classes.Body}>
+      <Filter />
+      <div className={classes.Products}>
+        <ProductCard
+          products={props.products}
+          path={path}
+          click={setQueryParamsForProductDetail}
+        />
+      </div>
+    </main>
   );
   if (props.loading) {
-    cart = <Spinner />;
+    products = <Spinner />;
   }
   return (
     <Container fluid className={classes.Container}>
-      {cart}
+      {products}
     </Container>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
-    products: state.products.products,
+    products: state.products.filteredProducts,
     loading: state.products.loading,
   };
 };
@@ -59,6 +66,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getProductsHandler: (type) => dispatch(actions.getProducts(type)),
+    searchForProductHandler: (event, products) =>
+      dispatch(actions.searchForProduct(event, products)),
   };
 };
 

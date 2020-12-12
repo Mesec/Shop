@@ -83,3 +83,7 @@ export const PURCHASE_CHANGE_HANDLER = "PURCHASE_CHANGE_HANDLER";
 
 export const SHOW_SIDE_DRAWER = "SHOW_SIDE_DRAWER";
 export const HIDE_SIDE_DRAWER = "HIDE_SIDE_DRAWER";
+
+//Filtering actions
+
+export const SEARCH_FOR_PRODUCT = "SEARCH_FOR_PRODUCT";

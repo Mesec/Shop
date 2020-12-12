@@ -3,16 +3,20 @@
 }
 .Row {
   width: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+.Col {
   display: flex;
   justify-content: center;
 }
-
 .Card {
   height: 280px;
   width: 14rem;
   text-align: center;
   padding-top: 10px;
-  margin-bottom: 35px;
+  margin-bottom: 25px;
   overflow: hidden;
   border-radius: 0;
   position: relative;
