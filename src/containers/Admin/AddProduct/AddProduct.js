@@ -32,11 +32,11 @@ const AddProduct = (props) => {
       </div>
       <Form.Row>
         <Form.Group as={Col} className={classes.FormGroup}>
-          <Form.Label>Product Name</Form.Label>
+          <Form.Label>Name</Form.Label>
           <Form.Control
             name="name"
             type="text"
-            placeholder="Product Name"
+            placeholder="Name"
             value={props.productData.name}
             size="sm"
             onChange={(event) => {
@@ -48,11 +48,11 @@ const AddProduct = (props) => {
           </p>
         </Form.Group>
         <Form.Group as={Col} className={classes.FormGroup}>
-          <Form.Label>Product Type</Form.Label>
+          <Form.Label>Type</Form.Label>
           <Form.Control
             name="type"
             type="text"
-            placeholder="Product Type"
+            placeholder="Type"
             value={props.productData.type}
             size="sm"
             onChange={(event) => {
@@ -99,11 +99,11 @@ const AddProduct = (props) => {
         </Form.Group>
       </Form.Row>
       <Form.Group className={classes.FormGroup}>
-        <Form.Label>Product Image</Form.Label>
+        <Form.Label>Image</Form.Label>
         <Form.Control
           name="image"
           type="text"
-          placeholder="Product Image"
+          placeholder="Image"
           value={props.productData.image}
           size="sm"
           onChange={(event) => {

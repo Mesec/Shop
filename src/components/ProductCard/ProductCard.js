@@ -61,7 +61,7 @@ const productCard = (props) => {
                   <Button
                     size="sm"
                     className={classes.Button}
-                    variant="info"
+                    variant="danger"
                     onClick={() => props.delProdShowModalHandler(product)}
                   >
                     Delete

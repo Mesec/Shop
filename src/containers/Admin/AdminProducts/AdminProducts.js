@@ -23,7 +23,7 @@ const AdminProducts = (props) => {
     products = <ProductCard products={props.products} path={path} />;
   }
   return (
-    <Container className={classes.Container}>
+    <Container fluid className={classes.Container}>
       <EditProductModal />
       <DeleteProductModal />
       {products}
