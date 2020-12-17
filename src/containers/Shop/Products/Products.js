@@ -12,7 +12,7 @@ import Filter from "../../../components/Filter/Filter";
 
 const Products = (props) => {
   const [path, changePath] = useState(null);
-
+  const [prods, updateProducts] = useState(null);
   useEffect(() => {
     changePath(props.history.location.pathname);
     const query = new URLSearchParams(props.location.search);
@@ -22,8 +22,10 @@ const Products = (props) => {
     }
     if (queryParam === "") {
       props.getProductsHandler();
+      updateProducts(props.products);
     } else {
       props.getProductsHandler(queryParam);
+      updateProducts(props.products);
     }
   }, []);
 
@@ -35,22 +37,30 @@ const Products = (props) => {
   };
 
   let products = (
-    <main className={classes.Body}>
-      <Filter />
-      <div className={classes.Products}>
-        <ProductCard
-          products={props.products}
-          path={path}
-          click={setQueryParamsForProductDetail}
-        />
-      </div>
-    </main>
+    <div className={classes.Products}>
+      <ProductCard
+        products={props.products}
+        path={path}
+        click={setQueryParamsForProductDetail}
+      />
+    </div>
+    // <main className={classes.Body}>
+    //  <Filter />
+    //   <div className={classes.Products}>
+    //     <ProductCard
+    //       products={props.products}
+    //       path={path}
+    //       click={setQueryParamsForProductDetail}
+    //     />
+    //   </div>
+    // </main>
   );
   if (props.loading) {
     products = <Spinner />;
   }
   return (
     <Container fluid className={classes.Container}>
+      <Filter />
       {products}
     </Container>
   );

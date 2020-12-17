@@ -98,22 +98,41 @@ const AddProduct = (props) => {
           </p>
         </Form.Group>
       </Form.Row>
-      <Form.Group className={classes.FormGroup}>
-        <Form.Label>Image</Form.Label>
-        <Form.Control
-          name="image"
-          type="text"
-          placeholder="Image"
-          value={props.productData.image}
-          size="sm"
-          onChange={(event) => {
-            props.onChangeHandler(event);
-          }}
-        />
-        <p className={classes.Error}>
-          {errorsObject.image ? errorsObject.image : ""}
-        </p>
-      </Form.Group>
+      <Form.Row>
+        <Form.Group className={classes.FormGroup} as={Col}>
+          <Form.Label>Image</Form.Label>
+          <Form.Control
+            name="image"
+            type="text"
+            placeholder="Image"
+            value={props.productData.image}
+            size="sm"
+            onChange={(event) => {
+              props.onChangeHandler(event);
+            }}
+          />
+          <p className={classes.Error}>
+            {errorsObject.image ? errorsObject.image : ""}
+          </p>
+        </Form.Group>
+        <Form.Group className={classes.FormGroup} as={Col}>
+          <Form.Label>Image</Form.Label>
+          <Form.Control
+            name="brand"
+            type="text"
+            placeholder="Brand"
+            value={props.productData.brand}
+            size="sm"
+            onChange={(event) => {
+              props.onChangeHandler(event);
+            }}
+          />
+          <p className={classes.Error}>
+            {errorsObject.brand ? errorsObject.brand : ""}
+          </p>
+        </Form.Group>
+      </Form.Row>
+
       <Form.Group className={classes.FormGroup}>
         <Form.Label>Description</Form.Label>
         <Form.Control

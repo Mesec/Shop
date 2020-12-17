@@ -15,7 +15,9 @@ const AdminProducts = (props) => {
 
   useEffect(() => {
     changePath(props.history.location.pathname);
-    props.getProductsHandler();
+    if (!props.products) {
+      props.getProductsHandler();
+    }
   }, []);
 
   let products = <Spinner />;

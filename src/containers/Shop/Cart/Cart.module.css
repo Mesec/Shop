@@ -5,6 +5,7 @@
 }
 .Cart {
   width: 20em;
+  border-radius: 0;
 }
 .CartBody {
   padding-left: 3px;
@@ -15,14 +16,21 @@
   background-color: #17a2b8;
   text-align: right;
   padding-right: 10px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 .Controls button {
   background-color: transparent;
   color: white;
   border: none;
   font-size: 0.9em;
+  padding: 0;
+  margin-right: 10px;
 }
 .Controls button:hover {
+  background-color: inherit;
   text-decoration: underline;
 }
 .Empty {

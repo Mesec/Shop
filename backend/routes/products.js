@@ -11,12 +11,16 @@ router.post(
   "/add-product",
   body("name")
     .isString()
-    .isLength({ min: 5 })
-    .withMessage("Name should be at least 5 characters long."),
+    .isLength({ min: 3 })
+    .withMessage("Name should be at least 3 characters long."),
   body("type")
     .isString()
-    .isLength({ min: 4 })
-    .withMessage("Type should be at least 4 characters long."),
+    .isLength({ min: 3 })
+    .withMessage("Type should be at least 3 characters long."),
+  body("brand")
+    .isString()
+    .isLength({ min: 3 })
+    .withMessage("Brand should be at least 3 characters long."),
   body("image")
     .isString()
     .isLength({ min: 4 })
@@ -53,5 +57,5 @@ router.post(
 );
 
 router.post("/delete-product", productController.deleteProduct);
-
+router.post("/get-products-by-price", productController.filterByPrice);
 module.exports = router;

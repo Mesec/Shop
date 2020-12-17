@@ -15,7 +15,7 @@ const Navigation = (props) => {
     <Navbar bg="info" variant="dark" expand="md" className={classes.Navbar}>
       {/* <ToggleButton /> */}
 
-      <Navbar.Brand as={NavLink} to="/">
+      <Navbar.Brand as={NavLink} to="/" className={classes.Brand}>
         Online-Shop
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />

@@ -245,10 +245,86 @@ export const hideSideDrawer = () => {
 
 // Filtering actions
 
-export const searchForProduct = (event, products) => {
+export const searchForProduct = (event) => {
   return {
     type: actionTypes.SEARCH_FOR_PRODUCT,
     event: event,
+  };
+};
+
+export const filterByPriceStart = (id) => {
+  return {
+    type: actionTypes.FILTER_BY_PRICE_START,
+    id: id,
+  };
+};
+export const filterByPriceSuccess = (products, id, min, max) => {
+  return {
+    type: actionTypes.FILTER_BY_PRICE_SUCCESS,
     products: products,
+    id: id,
+    min: min,
+    max: max,
+  };
+};
+
+export const filterByPriceFailed = () => {
+  return {
+    type: actionTypes.FILTER_BY_PRICE_FAILED,
+  };
+};
+
+export const filterByPrice = (min, max, id) => {
+  return (dispatch) => {
+    dispatch(filterByPriceStart(id));
+    axios
+      .post("http://localhost:5000/products/get-products-by-price", {
+        min: min,
+        max: max,
+      })
+      .then((result) => {
+        dispatch(filterByPriceSuccess(result.data, id, min, max));
+      })
+      .catch((error) => {
+        dispatch(filterByPriceFailed());
+      });
+  };
+};
+
+export const filterByBrandStart = (id) => {
+  return {
+    type: actionTypes.FILTER_BY_BRAND_START,
+    id: id,
+  };
+};
+export const filterByBrandSuccess = (products, id, brand) => {
+  return {
+    type: actionTypes.FILTER_BY_BRAND_SUCCESS,
+    products: products,
+    id: id,
+    brand: brand,
+  };
+};
+export const filterByBrandFailed = () => {
+  return {
+    type: actionTypes.FILTER_BY_BRAND_FAILED,
+  };
+};
+
+export const filterByBrand = (brand, min, max, id) => {
+  return (dispatch) => {
+    dispatch(filterByBrandStart(id));
+    axios
+      .post("http://localhost:5000/products/get-products-by-price", {
+        min: min,
+        max: max,
+        brand: brand,
+      })
+      .then((result) => {
+        dispatch(filterByBrandSuccess(result.data, id, brand));
+      })
+      .catch((error) => {
+        dispatch(filterByBrandFailed(error.response));
+      });
   };
 };

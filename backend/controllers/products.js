@@ -30,6 +30,26 @@ exports.getProducts = (req, res, next) => {
     });
 };
 
+// ***GET PRODUCTS FILTERED BY PRICE***
+
+exports.filterByPrice = (req, res, next) => {
+  const min = req.body.min;
+  const max = req.body.max;
+
+  Product.find()
+    .then((products) => {
+      const filteredProducts = products.filter((product) => {
+        if (product.price < max && product.price > min) {
+          return product;
+        }
+      });
+      res.status(200).json(filteredProducts);
+    })
+    .catch((error) => {
+      res.json(error);
+    });
+};
+
 //    ****GET SINGLE PRODUCT FROM DB****
 exports.getProduct = (req, res, next) => {
   const prodId = req.body.productId;
