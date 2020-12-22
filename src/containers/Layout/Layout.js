@@ -28,7 +28,7 @@ const layout = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    showSideDrawer: state.products.showSideDrawer,
+    showSideDrawer: state.products.isSideDrawerShown,
   };
 };
 

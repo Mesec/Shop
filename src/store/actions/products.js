@@ -7,11 +7,12 @@ export const getProductsStart = () => {
     type: actionTypes.GET_PRODUCTS_START,
   };
 };
-export const getProductsSuccess = (products, filteredTypes) => {
+export const getProductsSuccess = (products, filteredTypes, productsType) => {
   return {
     type: actionTypes.GET_PRODUCTS_SUCCESS,
     products: products,
     filteredTypes: filteredTypes,
+    productsType: productsType,
   };
 };
 export const getProductsFailed = () => {
@@ -32,7 +33,8 @@ export const getProducts = (type) => {
         dispatch(
           getProductsSuccess(
             products.data.products,
-            products.data.filteredTypes
+            products.data.filteredTypes,
+            type
           )
         );
         dispatch(hideSideDrawer());
@@ -243,14 +245,7 @@ export const hideSideDrawer = () => {
   };
 };
 
-// Filtering actions
-
-export const searchForProduct = (event) => {
-  return {
-    type: actionTypes.SEARCH_FOR_PRODUCT,
-    event: event,
-  };
-};
+//Filtering
 
 export const filterByPriceStart = (id) => {
   return {
@@ -258,11 +253,10 @@ export const filterByPriceStart = (id) => {
     id: id,
   };
 };
-export const filterByPriceSuccess = (products, id, min, max) => {
+export const filterByPriceSuccess = (products, min, max) => {
   return {
     type: actionTypes.FILTER_BY_PRICE_SUCCESS,
     products: products,
-    id: id,
     min: min,
     max: max,
   };
@@ -274,57 +268,11 @@ export const filterByPriceFailed = () => {
   };
 };
 
-export const filterByPrice = (min, max, id) => {
+export const filterByPrice = (id, min, max) => {
   return (dispatch) => {
     dispatch(filterByPriceStart(id));
-    axios
-      .post("http://localhost:5000/products/get-products-by-price", {
-        min: min,
-        max: max,
-      })
-      .then((result) => {
-        dispatch(filterByPriceSuccess(result.data, id, min, max));
-      })
-      .catch((error) => {
-        dispatch(filterByPriceFailed());
-      });
-  };
-};
-
-export const filterByBrandStart = (id) => {
-  return {
-    type: actionTypes.FILTER_BY_BRAND_START,
-    id: id,
-  };
-};
-export const filterByBrandSuccess = (products, id, brand) => {
-  return {
-    type: actionTypes.FILTER_BY_BRAND_SUCCESS,
-    products: products,
-    id: id,
-    brand: brand,
-  };
-};
-export const filterByBrandFailed = () => {
-  return {
-    type: actionTypes.FILTER_BY_BRAND_FAILED,
-  };
-};
-
-export const filterByBrand = (brand, min, max, id) => {
-  return (dispatch) => {
-    dispatch(filterByBrandStart(id));
-    axios
-      .post("http://localhost:5000/products/get-products-by-price", {
-        min: min,
-        max: max,
-        brand: brand,
-      })
-      .then((result) => {
-        dispatch(filterByBrandSuccess(result.data, id, brand));
-      })
-      .catch((error) => {
-        dispatch(filterByBrandFailed(error.response));
-      });
+    axios.post("http://localhost:5000/products/get-products").then((res) => {
+      dispatch(filterByPriceSuccess(res.data.products, min, max));
+    });
   };
 };

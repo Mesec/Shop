@@ -19,7 +19,7 @@ const AdminProducts = (props) => {
       props.getProductsHandler();
     }
   }, []);
-
+  console.log(props.productToUpdate);
   let products = <Spinner />;
   if (!props.loading) {
     products = <ProductCard products={props.products} path={path} />;

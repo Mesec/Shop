@@ -2,32 +2,18 @@ import * as actionTypes from "../actions/actionsTypes";
 
 const initialState = {
   products: null,
-  filteredProducts: null,
-  filteredByPrice: null,
+  previousProducts: null,
   productTypes: null,
-  productBrands: null,
-  product: null,
+  appliedFilters: [],
+  singleProduct: null,
   errors: false,
   loading: false,
-  editPrModal: false,
-  deletePrModal: false,
+  isEditModalShown: false,
+  isDeleteModalShown: false,
   productToUpdate: null,
   productToDelete: null,
-  isProductAdded: false,
-  showSideDrawer: false,
-  brandCheckboxes: null,
-  filterControls: {
-    min: 0,
-    max: 2000,
-  },
-  priceCheckboxes: [
-    { name: "All Products", checked: true, min: 0, max: 5000, id: 0 },
-    { name: "0-$50", checked: false, min: 0, max: 50, id: 1 },
-    { name: "$50 - $100", checked: false, min: 50, max: 100, id: 2 },
-    { name: "$100 - $200", checked: false, min: 100, max: 200, id: 3 },
-    { name: "$200 and higher", checked: false, min: 200, max: 5000, id: 4 },
-  ],
-  productData: {
+  isSideDrawerShown: false,
+  updateProductData: {
     name: "",
     type: "",
     image: "",
@@ -35,39 +21,57 @@ const initialState = {
     price: "",
     description: "",
   },
+  priceCheckboxes: [
+    { description: "0 - $100", checked: false, min: 0, max: 100, id: 0 },
+    { description: "$100 - $200", checked: false, min: 100, max: 200, id: 1 },
+    { description: "$200 - $300", checked: false, min: 200, max: 300, id: 2 },
+    { description: "$300 - $500", checked: false, min: 300, max: 500, id: 3 },
+    {
+      description: "$500+",
+      checked: false,
+      min: 500,
+      max: 2000,
+      id: 4,
+    },
+  ],
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    //    ****GET PRODUCTS****
+    //Get products
     case actionTypes.GET_PRODUCTS_START:
       return {
         ...state,
         loading: true,
       };
     case actionTypes.GET_PRODUCTS_SUCCESS:
-      let brands = [];
-      action.products.forEach((prod) => {
-        brands.push(prod.brand);
+      //Storing type of filtered action
+      let appliedFilters = state.appliedFilters;
+      const uncheckPriceCheckboxes = [...state.priceCheckboxes];
+      uncheckPriceCheckboxes.forEach((checkbox) => {
+        checkbox.checked = false;
       });
-      let filteredBrands = brands.filter((brand, index) => {
-        return brands.indexOf(brand) === index;
-      });
-      let brandCheckboxes = [];
-      filteredBrands.forEach((brand, index) => {
-        brandCheckboxes.push({ name: brand, checked: false, id: index });
-      });
+      if (action.productsType) {
+        let index = state.appliedFilters.indexOf(action.productsType);
+        if (index === -1) {
+          appliedFilters = [];
+          appliedFilters.push(action.productsType);
+        }
+      } else {
+        appliedFilters = [];
+      }
       return {
         ...state,
         products: action.products,
-        filteredProducts: action.products,
+        productTypes: action.filteredTypes,
         loading: false,
         errors: false,
-        product: null,
-        productTypes: action.filteredTypes,
-        brandCheckboxes: brandCheckboxes,
+        singleProduct: null,
+        appliedFilters: appliedFilters,
+        priceCheckboxes: uncheckPriceCheckboxes,
       };
-    //    ****GET SINGLE PRODUCT****
+
+    //Get single product
     case actionTypes.GET_SINGLE_PRODUCT_START:
       return {
         ...state,
@@ -77,7 +81,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        product: action.product,
+        singleProduct: action.product,
       };
     case actionTypes.GET_SINGLE_PRODUCT_FAILED:
       return {
@@ -85,18 +89,17 @@ const reducer = (state = initialState, action) => {
         loading: false,
       };
 
-    //    ****ADD PRODUCT****
+    //Add product
     case actionTypes.ADD_PRODUCT_START:
       return {
         ...state,
         loading: true,
-        isProductAdded: false,
       };
     case actionTypes.ADD_PRODUCT_SUCCESS:
       return {
         ...state,
         loading: false,
-        productData: {
+        updateProductData: {
           name: "",
           type: "",
           image: "",
@@ -105,18 +108,16 @@ const reducer = (state = initialState, action) => {
           description: "",
           errors: false,
         },
-        isProductAdded: true,
       };
     case actionTypes.ADD_PRODUCT_FAILED:
       return {
         ...state,
         loading: false,
         errors: action.errors,
-        productData: action.oldData,
-        isProductAdded: false,
+        updateProductData: action.oldData,
       };
     case actionTypes.ADD_PRODUCT_CHANGE_HANDLER:
-      const updatedProductData = { ...state.productData };
+      const updatedProductData = { ...state.updateProductData };
       Object.keys(updatedProductData).forEach((item) => {
         if (action.event.target.name === item) {
           updatedProductData[item] = action.event.target.value;
@@ -124,10 +125,10 @@ const reducer = (state = initialState, action) => {
       });
       return {
         ...state,
-        productData: updatedProductData,
+        updateProductData: updatedProductData,
       };
 
-    //    ****EDIT PRODUCT****
+    //Update product
     case actionTypes.UPDATE_PRODUCT_START:
       return {
         ...state,
@@ -158,21 +159,21 @@ const reducer = (state = initialState, action) => {
         productToUpdate: { ...productCopy },
       };
 
-    //    -Update product -modal controls
+    //Update product (modal controls)
     case actionTypes.SHOW_UPDATE_PRODUCT_MODAL:
       return {
         ...state,
-        editPrModal: true,
+        isEditModalShown: true,
         productToUpdate: action.productToUpdate,
       };
     case actionTypes.HIDE_UPDATE_PRODUCT_MODAL:
       return {
         ...state,
-        editPrModal: false,
+        isEditModalShown: false,
         errors: false,
       };
 
-    //   ****DELETE PRODUCT****
+    //Delete product
     case actionTypes.DELETE_PRODUCT_START:
       return {
         ...state,
@@ -188,152 +189,77 @@ const reducer = (state = initialState, action) => {
         ...state,
         loading: false,
       };
-    //    -Delete product -modal controls
+    //Delete product (modal controls)
     case actionTypes.SHOW_DELETE_PRODUCT_MODAL:
       return {
         ...state,
-        deletePrModal: true,
+        isDeleteModalShown: true,
         productToDelete: action.product,
       };
     case actionTypes.HIDE_DELETE_PRODUCT_MODAL:
       return {
         ...state,
-        deletePrModal: false,
+        isDeleteModalShown: false,
       };
-    //Side drawer controls
+    //Side drawer controls (show-hide)
     case actionTypes.SHOW_SIDE_DRAWER:
       return {
         ...state,
-        showSideDrawer: true,
+        isSideDrawerShown: true,
       };
     case actionTypes.HIDE_SIDE_DRAWER:
       return {
         ...state,
-        showSideDrawer: false,
+        isSideDrawerShown: false,
       };
-    //Filtering products reducers
-    case actionTypes.SEARCH_FOR_PRODUCT:
-      const products = state.products;
 
-      const filteredProducts = products.filter((item) => {
-        return item.name
-          .toUpperCase()
-          .includes(action.event.target.value.toUpperCase(), 0);
-      });
-      const price_checkboxes = state.priceCheckboxes.forEach(
-        (checkbox) => (checkbox.checked = false)
-      );
-      let brand__checkboxes;
-      if (state.brandCheckboxes) {
-        brand__checkboxes = state.brandCheckboxes.forEach(
-          (checkbox) => (checkbox.checked = false)
-        );
-      }
-      return {
-        ...state,
-        filteredProducts: filteredProducts,
-        priceCheckbox: price_checkboxes,
-        brandCheckboxes: brand__checkboxes,
-      };
+    //Filtering
     case actionTypes.FILTER_BY_PRICE_START:
-      const checkBoxes = [...state.priceCheckboxes];
-      if (!checkBoxes[action.id].checked) {
-        checkBoxes.forEach((item, index) =>
-          index !== action.id
-            ? (checkBoxes[index].checked = false)
-            : (checkBoxes[index].checked = true)
-        );
-      } else {
-        return { ...state };
-      }
+      const updatedPriceCheckboxes = [...state.priceCheckboxes];
+      updatedPriceCheckboxes.forEach((checkbox) => {
+        if (checkbox.id === action.id) {
+          checkbox.checked = !checkbox.checked;
+        } else {
+          checkbox.checked = false;
+        }
+      });
       return {
         ...state,
-        loading: true,
-        priceCheckboxes: checkBoxes,
+        priceCheckboxes: updatedPriceCheckboxes,
       };
     case actionTypes.FILTER_BY_PRICE_SUCCESS:
-      let filteredProds;
-      const brand_Checkboxes = [];
-      let { filterControls } = state;
-      const checkboxes = [...state.priceCheckboxes];
-      if (checkboxes[action.id].checked) {
-        filteredProds = action.products;
+      let filtered_products = [];
 
-        //extracting brands
-        const prodBrands = [];
-        filteredProds.forEach((prod) => prodBrands.push(prod.brand));
-
-        //deleting duplicates from prodBrands array
-        const filtered_brands = prodBrands.filter((item, index) => {
-          return prodBrands.indexOf(item) === index;
-        });
-        //making brand_checkboxes object
-        filtered_brands.forEach((brand, index) => {
-          brand_Checkboxes.push({ name: brand, checked: false, id: index });
-        });
-        //setting filter controls -min and max price
-        filterControls.min = action.min;
-        filterControls.max = action.max;
-      } else {
-        const prodBrands = [];
-        state.products.forEach((prod) => prodBrands.push(prod.brand));
-        const filtered_brands = prodBrands.filter((item, index) => {
-          return prodBrands.indexOf(item) === index;
-        });
-        filtered_brands.forEach((brand, index) => {
-          brand_Checkboxes.push({ name: brand, checked: false, id: index });
-        });
-        filterControls.min = action.min;
-        filterControls.max = action.max;
-        filteredProds = state.products;
-      }
-      return {
-        ...state,
-        filteredProducts: filteredProds,
-        filterControls: filterControls,
-        brandCheckboxes: brand_Checkboxes,
-        loading: false,
-      };
-    case actionTypes.FILTER_BY_PRICE_FAILED:
-      return {
-        ...state,
-        loading: false,
-      };
-    case actionTypes.FILTER_BY_BRAND_START:
-      const brand_checkboxes = [...state.brandCheckboxes];
-      if (!brand_checkboxes[action.id].checked) {
-        brand_checkboxes.forEach((item) => {
-          item.id !== action.id
-            ? (item.checked = false)
-            : (item.checked = true);
-        });
-      } else {
-        brand_checkboxes[action.id].checked = false;
-      }
-      return {
-        ...state,
-        brandCheckboxes: brand_checkboxes,
-      };
-
-    case actionTypes.FILTER_BY_BRAND_SUCCESS:
-      let filtered_products;
-
-      if (state.brandCheckboxes[action.id].checked) {
-        filtered_products = action.products.filter((product) => {
-          return product.brand === action.brand;
-        });
-      }
-      let checkedValidation = state.brandCheckboxes.every(
+      const nonChecked = state.priceCheckboxes.every(
         (checkbox) => checkbox.checked === false
       );
-      if (checkedValidation) {
-        console.log(action.products);
-        filtered_products = [...action.products];
-      }
 
+      if (nonChecked) {
+        if (state.appliedFilters.length > 0) {
+          filtered_products = action.products.filter((product) => {
+            return product.type === state.appliedFilters[0];
+          });
+        } else {
+          filtered_products = action.products;
+        }
+      }
+      if (!nonChecked) {
+        if (state.appliedFilters.length > 0) {
+          let filteredByType = action.products.filter((product) => {
+            return product.type === state.appliedFilters[0];
+          });
+          filtered_products = filteredByType.filter((product) => {
+            return product.price >= action.min && product.price <= action.max;
+          });
+        } else {
+          filtered_products = action.products.filter((product) => {
+            return product.price >= action.min && product.price <= action.max;
+          });
+        }
+      }
       return {
         ...state,
-        filteredProducts: filtered_products,
+        products: filtered_products,
       };
     default:
       return state;

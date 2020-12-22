@@ -29,7 +29,7 @@ const modal = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    isModalShown: state.products.deletePrModal,
+    isModalShown: state.products.isDeleteModalShown,
     productToDelete: state.products.productToDelete,
     loading: state.products.loading,
   };

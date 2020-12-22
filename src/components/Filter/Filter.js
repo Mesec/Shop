@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { usesTate } from "react";
 import classes from "./Filter.module.css";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/products";
@@ -6,21 +6,11 @@ import ToggleBtn from "../ToggleButton/Toggle";
 import searchIcon from "../../images/loupe.png";
 
 const Filter = (props) => {
-  let brands = [];
-  if (props.brandCheckboxes) {
-    props.brandCheckboxes.forEach((brand) => {
-      brands.push(brand.name);
-    });
-  }
   return (
     <div className={classes.Filter}>
       <div className={classes.Header}>
         <div className={classes.Search}>
-          <input
-            type="text"
-            placeholder="Search"
-            onChange={(event) => props.searchForProductHandler(event)}
-          />
+          <input type="text" placeholder="Search" />
           <button>
             <img src={searchIcon} alt="" />
           </button>
@@ -30,48 +20,26 @@ const Filter = (props) => {
       <div className={classes.Container}>
         <h6>Price</h6>
         <hr />
-        {props.priceCheckbox.map((item) => {
+        {props.priceCheckboxes.map((item) => {
           return (
-            <div className={classes.Actions}>
+            <div className={classes.Actions} key={item.id}>
               <input
-                id={item.name}
+                id={item.id}
                 type="checkbox"
-                onChange={() =>
-                  props.filterByPrice(item.min, item.max, item.id)
-                }
-                name={item.name}
+                name={item.id}
                 checked={item.checked}
+                onChange={() =>
+                  props.filterByPrice(item.id, item.min, item.max)
+                }
               />
-              <label htmlFor={item.name}>{item.name}</label>
+              <label htmlFor={item.id}>{item.description}</label>
             </div>
           );
         })}
       </div>
       <div className={classes.Container}>
-        <h6>Brands</h6>
+        <h6>Brand</h6>
         <hr />
-        {props.brandCheckboxes
-          ? props.brandCheckboxes.map((brand) => {
-              return (
-                <div className={classes.Actions} key={brand}>
-                  <input
-                    type="checkbox"
-                    onChange={(event) =>
-                      props.filterByBrand(
-                        brand.name,
-                        props.min,
-                        props.max,
-                        brand.id
-                      )
-                    }
-                    name="brand"
-                    checked={brand.checked}
-                  />
-                  <label htmlFor={brand.name}>{brand.name}</label>
-                </div>
-              );
-            })
-          : null}
       </div>
     </div>
   );
@@ -80,21 +48,14 @@ const Filter = (props) => {
 const mapStateToProps = (state) => {
   return {
     products: state.products.filteredProducts,
-    priceCheckbox: state.products.priceCheckboxes,
-    brandCheckboxes: state.products.brandCheckboxes,
-    min: state.products.filterControls.min,
-    max: state.products.filterControls.max,
+    priceCheckboxes: state.products.priceCheckboxes,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    searchForProductHandler: (event) =>
-      dispatch(actions.searchForProduct(event)),
-    filterByPrice: (min, max, id) =>
-      dispatch(actions.filterByPrice(min, max, id)),
-    filterByBrand: (brand, min, max, id) =>
-      dispatch(actions.filterByBrand(brand, min, max, id)),
+    filterByPrice: (id, min, max) =>
+      dispatch(actions.filterByPrice(id, min, max)),
   };
 };
 

@@ -23,6 +23,8 @@ const ProductDetail = (props) => {
     props.getProductHandler(productId);
   }, []);
 
+  console.log(props.product);
+
   return (
     <Container className={classes.Container}>
       <Row>
@@ -128,7 +130,7 @@ const ProductDetail = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    product: state.products.product,
+    product: state.products.singleProduct,
     loading: state.products.loading,
     quantity: state.cart.quantity,
   };

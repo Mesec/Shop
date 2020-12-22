@@ -52,7 +52,7 @@ const sideDrawer = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    showSideDrawer: state.products.showSideDrawer,
+    showSideDrawer: state.products.isSideDrawerShown,
     products: state.products.products,
     productTypes: state.products.productTypes,
   };

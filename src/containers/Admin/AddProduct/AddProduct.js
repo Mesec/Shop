@@ -176,10 +176,9 @@ const AddProduct = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    productData: state.products.productData,
+    productData: state.products.updateProductData,
     loading: state.products.loading,
     errors: state.products.errors,
-    isProductAdded: state.products.isProductAdded,
   };
 };
 

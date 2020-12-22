@@ -7,10 +7,10 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Spinner from "../Spinner/Spinner";
 
-const modal = props => {
+const modal = (props) => {
   let errorsObject = {};
   if (props.errors) {
-    props.errors.forEach(error => {
+    props.errors.forEach((error) => {
       errorsObject[error.param] = error.msg;
     });
   } else {
@@ -43,7 +43,7 @@ const modal = props => {
                 name="name"
                 placeholder="Edit Name"
                 value={props.product ? props.product.name : ""}
-                onChange={event => props.onChangeHandler(event)}
+                onChange={(event) => props.onChangeHandler(event)}
                 size="sm"
               />
               <p
@@ -65,7 +65,7 @@ const modal = props => {
                 name="type"
                 placeholder="Edit Type"
                 value={props.product ? props.product.type : ""}
-                onChange={event => props.onChangeHandler(event)}
+                onChange={(event) => props.onChangeHandler(event)}
                 size="sm"
               />
               <p
@@ -86,7 +86,7 @@ const modal = props => {
                 name="image"
                 placeholder="Edit Image"
                 value={props.product ? props.product.image : ""}
-                onChange={event => props.onChangeHandler(event)}
+                onChange={(event) => props.onChangeHandler(event)}
                 size="sm"
               />
               <p
@@ -107,7 +107,7 @@ const modal = props => {
                 name="amount"
                 placeholder="Edit Amount"
                 value={props.product ? props.product.amount : ""}
-                onChange={event => props.onChangeHandler(event)}
+                onChange={(event) => props.onChangeHandler(event)}
                 size="sm"
               />
               <p
@@ -128,7 +128,7 @@ const modal = props => {
                 name="price"
                 placeholder="Edit Price"
                 value={props.product ? props.product.price : ""}
-                onChange={event => props.onChangeHandler(event)}
+                onChange={(event) => props.onChangeHandler(event)}
                 size="sm"
               />
               <p
@@ -150,7 +150,7 @@ const modal = props => {
                 rows={2}
                 placeholder="Edit Description"
                 value={props.product ? props.product.description : ""}
-                onChange={event => props.onChangeHandler(event)}
+                onChange={(event) => props.onChangeHandler(event)}
                 size="sm"
               />
               <p
@@ -184,20 +184,20 @@ const modal = props => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    isModalShown: state.products.editPrModal,
+    isModalShown: state.products.isEditModalShown,
     product: state.products.productToUpdate,
     errors: state.products.errors,
     loading: state.products.loading,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    updateProductHandler: product => dispatch(actions.updateProduct(product)),
+    updateProductHandler: (product) => dispatch(actions.updateProduct(product)),
     hideModalHandler: () => dispatch(actions.updProdHideModal()),
-    onChangeHandler: event => dispatch(actions.productChangeHandler(event)),
+    onChangeHandler: (event) => dispatch(actions.productChangeHandler(event)),
   };
 };
 

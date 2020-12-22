@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import Products from "../../containers/Shop/Products/Products";
 import AddProduct from "../../containers/Admin/AddProduct/AddProduct";
 import ProductDetail from "../../containers/Shop/ProductDetail/ProductDetail";
+import ProductTypes from "../../containers/Shop/ProductTypes/ProductTypes";
+
 import AdminProducts from "../../containers/Admin/AdminProducts/AdminProducts";
 import Login from "../../containers/Auth/Login/Login";
 import Register from "../../containers/Auth/Register/Register";
@@ -15,7 +17,7 @@ const Routes = (props) => {
   return (
     <Switch>
       <Route path="/" exact component={() => <Products />} />
-      <Route path="/products" exact component={() => <Products />} />
+      <Route path="/products" exact component={() => <ProductTypes />} />
       <Route path="/product" exact component={() => <ProductDetail />} />
       <Route path="/cart" component={() => <Cart />} />
       <Route path="/login" component={() => <Login />} />

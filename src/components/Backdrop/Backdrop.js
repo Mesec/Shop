@@ -11,14 +11,10 @@ const backdrop = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {};
-};
-
 const mapDispatchToProps = (dispatch) => {
   return {
     hideSideDrawerHandler: () => dispatch(actions.hideSideDrawer()),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(backdrop);
+export default connect(null, mapDispatchToProps)(backdrop);
