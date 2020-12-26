@@ -69,8 +69,9 @@ exports.postProduct = (req, res, next) => {
   const image = req.body.image;
   const amount = req.body.amount;
   const price = req.body.price;
+  const brand = req.body.brand;
   const description = req.body.description;
-
+  console.log(req.body);
   const errors = validationResult(req);
   if (!errors.isEmpty())
     return res.status(402).json({ errors: errors, oldData: req.body });
@@ -81,6 +82,7 @@ exports.postProduct = (req, res, next) => {
       image: image,
       amount: amount,
       price: price,
+      brand: brand,
       description: description,
     });
     product

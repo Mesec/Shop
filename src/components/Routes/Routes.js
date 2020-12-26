@@ -29,11 +29,6 @@ const Routes = (props) => {
             exact
             component={() => <AdminProducts />}
           />
-          <Route
-            path="/admin/add-product"
-            exact
-            component={() => <AddProduct />}
-          />
           <Route path="/orders" component={() => <Orders />} />
         </div>
       ) : (

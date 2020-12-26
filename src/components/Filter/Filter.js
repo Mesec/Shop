@@ -9,12 +9,15 @@ const Filter = (props) => {
   return (
     <div className={classes.Filter}>
       <div className={classes.Header}>
-        <div className={classes.Search}>
-          <input type="text" placeholder="Search" />
-          <button>
-            <img src={searchIcon} alt="" />
-          </button>
-        </div>
+        <input
+          type="text"
+          placeholder="Search"
+          onKeyDown={(event) => {
+            if (event.code === "Enter") {
+              props.filterByInputValue(event);
+            }
+          }}
+        />
         <ToggleBtn />
       </div>
       <div className={classes.Container}>
@@ -56,6 +59,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     filterByPrice: (id, min, max) =>
       dispatch(actions.filterByPrice(id, min, max)),
+    filterByInputValue: (event) => dispatch(actions.filterByInputValue(event)),
   };
 };
 

@@ -48,6 +48,13 @@ const Products = (props) => {
   if (props.loading) {
     products = <Spinner />;
   }
+  if (props.products && props.products.length === 0) {
+    products = (
+      <div className={classes.NoProductsFound}>
+        <h3>No products found</h3>
+      </div>
+    );
+  }
   return (
     <Container fluid className={classes.Container}>
       <Filter />

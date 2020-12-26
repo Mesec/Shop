@@ -1,0 +1,14 @@
+.Error {
+  font-size: 0.74em;
+  padding-top: 2px;
+  height: 10px;
+  color: red;
+  margin: 0;
+}
+.ButtonContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+.ButtonContainer button {
+  margin-right: 10px;
+}

@@ -116,7 +116,7 @@ const AddProduct = (props) => {
           </p>
         </Form.Group>
         <Form.Group className={classes.FormGroup} as={Col}>
-          <Form.Label>Image</Form.Label>
+          <Form.Label>Brand</Form.Label>
           <Form.Control
             name="brand"
             type="text"

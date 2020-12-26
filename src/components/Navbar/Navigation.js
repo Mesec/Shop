@@ -47,13 +47,6 @@ const Navigation = (props) => {
               </Nav.Link>
             </NavItem>
           ) : null}
-          {token ? (
-            <NavItem>
-              <Nav.Link as={NavLink} to="/admin/add-product">
-                Add Product
-              </Nav.Link>
-            </NavItem>
-          ) : null}
         </Nav>
 
         <Nav>

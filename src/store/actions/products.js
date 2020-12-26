@@ -103,6 +103,7 @@ export const addProductFailed = (errors, oldData) => {
 };
 
 export const addProduct = (data) => {
+  data.event.preventDefault();
   return (dispatch) => {
     dispatch(addProductStart());
     axios
@@ -110,7 +111,7 @@ export const addProduct = (data) => {
       .then((response) => {
         dispatch(addProductSuccess());
         dispatch(getProducts());
-        data.history.push("/admin/products");
+        dispatch(hideAddProductModal());
       })
       .catch((err) => {
         dispatch(
@@ -126,6 +127,17 @@ export const addProductChangeHandler = (event) => {
   return {
     type: actionTypes.ADD_PRODUCT_CHANGE_HANDLER,
     event: event,
+  };
+};
+
+export const showAddProductModal = () => {
+  return {
+    type: actionTypes.SHOW_ADD_PRODUCT_MODAL,
+  };
+};
+export const hideAddProductModal = () => {
+  return {
+    type: actionTypes.HIDE_ADD_PRODUCT_MODAL,
   };
 };
 //    EDIT PRODUCT
@@ -247,6 +259,35 @@ export const hideSideDrawer = () => {
 
 //Filtering
 
+//Filter by input field value
+export const filterByInputValueStart = () => {
+  return {
+    type: actionTypes.SEARCH_FOR_PRODUCT_START,
+  };
+};
+
+export const filterByInputValueSuccess = (products, event) => {
+  return {
+    type: actionTypes.SEARCH_FOR_PRODUCT_SUCCESS,
+    event: event,
+    products: products,
+  };
+};
+export const filterByInputValue = (event) => {
+  return (dispatch) => {
+    dispatch(filterByInputValueStart());
+    axios
+      .post("http://localhost:5000/products/get-products")
+      .then((res) => {
+        dispatch(filterByInputValueSuccess(res.data.products, event));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+};
+
+//Filter by price
 export const filterByPriceStart = (id) => {
   return {
     type: actionTypes.FILTER_BY_PRICE_START,
@@ -271,8 +312,13 @@ export const filterByPriceFailed = () => {
 export const filterByPrice = (id, min, max) => {
   return (dispatch) => {
     dispatch(filterByPriceStart(id));
-    axios.post("http://localhost:5000/products/get-products").then((res) => {
-      dispatch(filterByPriceSuccess(res.data.products, min, max));
-    });
+    axios
+      .post("http://localhost:5000/products/get-products")
+      .then((res) => {
+        dispatch(filterByPriceSuccess(res.data.products, min, max));
+      })
+      .catch((error) => {
+        dispatch(filterByPriceFailed(error));
+      });
   };
 };

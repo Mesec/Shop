@@ -5,11 +5,13 @@ const initialState = {
   previousProducts: null,
   productTypes: null,
   appliedFilters: [],
+  searchingForProducts: false,
   singleProduct: null,
   errors: false,
   loading: false,
   isEditModalShown: false,
   isDeleteModalShown: false,
+  isAddProductModalShown: false,
   productToUpdate: null,
   productToDelete: null,
   isSideDrawerShown: false,
@@ -19,6 +21,7 @@ const initialState = {
     image: "",
     amount: "",
     price: "",
+    brand: "",
     description: "",
   },
   priceCheckboxes: [
@@ -45,7 +48,6 @@ const reducer = (state = initialState, action) => {
         loading: true,
       };
     case actionTypes.GET_PRODUCTS_SUCCESS:
-      //Storing type of filtered action
       let appliedFilters = state.appliedFilters;
       const uncheckPriceCheckboxes = [...state.priceCheckboxes];
       uncheckPriceCheckboxes.forEach((checkbox) => {
@@ -127,7 +129,16 @@ const reducer = (state = initialState, action) => {
         ...state,
         updateProductData: updatedProductData,
       };
-
+    case actionTypes.SHOW_ADD_PRODUCT_MODAL:
+      return {
+        ...state,
+        isAddProductModalShown: true,
+      };
+    case actionTypes.HIDE_ADD_PRODUCT_MODAL:
+      return {
+        ...state,
+        isAddProductModalShown: false,
+      };
     //Update product
     case actionTypes.UPDATE_PRODUCT_START:
       return {
@@ -214,6 +225,25 @@ const reducer = (state = initialState, action) => {
       };
 
     //Filtering
+
+    //Filtering by input field value
+    case actionTypes.SEARCH_FOR_PRODUCT_SUCCESS:
+      let filtered__products = [];
+      const uncheck_price_checkboxes = [...state.priceCheckboxes];
+      uncheck_price_checkboxes.forEach((checkbox) => {
+        checkbox.checked = false;
+      });
+      const value = action.event.target.parentNode.children[0].value.toUpperCase();
+      filtered__products = action.products.filter((product) => {
+        return product.name.toUpperCase().includes(value.toUpperCase());
+      });
+
+      return {
+        ...state,
+        products: filtered__products,
+        priceCheckboxes: uncheck_price_checkboxes,
+      };
+    //Filtering by price
     case actionTypes.FILTER_BY_PRICE_START:
       const updatedPriceCheckboxes = [...state.priceCheckboxes];
       updatedPriceCheckboxes.forEach((checkbox) => {
