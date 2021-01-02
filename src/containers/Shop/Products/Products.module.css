@@ -6,36 +6,10 @@
   justify-content: space-between;
   font-family: "Karla", sans-serif;
 }
-
-.Navbar {
-  width: 95%;
-  height: 100%;
-  /* background-color: #17a2b8; */
-  background-color: rgb(243, 235, 235);
-  height: 33px;
-  /* margin-bottom: 40px; */
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.Navbar input {
-  padding-left: 17px;
-  border: none;
-  margin-right: 5px;
-  width: 300px;
-}
-.Body {
-  display: flex;
-  justify-content: space-around;
-  height: 100%;
-}
 .Products {
   padding-top: 30px;
   width: 80%;
-  /* height: 100%; */
-  /* border-top: 1px solid #94ecfa; */
 }
-
 .NoProductsFound {
   width: 80%;
   display: flex;
@@ -45,4 +19,36 @@
 .NoProductsFound h3 {
   position: relative;
   bottom: 40px;
+}
+.Filter {
+  display: none;
+}
+@media (max-width: 1007px) {
+  .Container {
+    flex-direction: column;
+  }
+  .Products {
+    width: 100%;
+  }
+  .Filter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #17a2b8;
+    padding: 0 10px;
+    text-align: center;
+    cursor: pointer;
+    padding-bottom: 4px;
+  }
+  .FilterIcon {
+    color: white;
+    margin-right: 5px;
+    cursor: pointer;
+  }
+  label {
+    display: flex;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+  }
 }

@@ -3,21 +3,13 @@ import classes from "./Filter.module.css";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/products";
 import ToggleBtn from "../ToggleButton/Toggle";
-import searchIcon from "../../images/loupe.png";
+import Input from "../Input/Input";
 
 const Filter = (props) => {
   return (
     <div className={classes.Filter}>
       <div className={classes.Header}>
-        <input
-          type="text"
-          placeholder="Search"
-          onKeyDown={(event) => {
-            if (event.code === "Enter") {
-              props.filterByInputValue(event);
-            }
-          }}
-        />
+        <Input />
         <ToggleBtn />
       </div>
       <div className={classes.Container}>

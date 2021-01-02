@@ -3,12 +3,14 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions/products";
 import classes from "./Products.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilter } from "@fortawesome/free-solid-svg-icons";
 
 import ProductCard from "../../../components/ProductCard/ProductCard";
 import Spinner from "../../../components/Spinner/Spinner";
 import Container from "react-bootstrap/Container";
-import ToggleBtn from "../../../components/ToggleButton/Toggle";
 import Filter from "../../../components/Filter/Filter";
+import Input from "../../../components/Input/Input";
 
 const Products = (props) => {
   const [path, changePath] = useState(null);
@@ -57,6 +59,13 @@ const Products = (props) => {
   }
   return (
     <Container fluid className={classes.Container}>
+      <div className={classes.Filter}>
+        <label htmlFor="" onClick={alert}>
+          <FontAwesomeIcon icon={faFilter} className={classes.FilterIcon} />
+          Filter
+        </label>
+        <Input />
+      </div>
       <Filter />
       {products}
     </Container>

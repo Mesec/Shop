@@ -233,7 +233,7 @@ const reducer = (state = initialState, action) => {
       uncheck_price_checkboxes.forEach((checkbox) => {
         checkbox.checked = false;
       });
-      const value = action.event.target.parentNode.children[0].value.toUpperCase();
+      const value = action.event.target.value.toUpperCase();
       filtered__products = action.products.filter((product) => {
         return product.name.toUpperCase().includes(value.toUpperCase());
       });

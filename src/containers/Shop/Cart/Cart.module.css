@@ -92,6 +92,8 @@ td span {
 }
 .EmptyCart {
   text-align: center;
+  position: relative;
+  top: 50px;
 }
 .EmptyCart div h4 {
   margin-bottom: 20px;

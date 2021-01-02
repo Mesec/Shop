@@ -112,3 +112,9 @@
 .ImageAdmin {
   cursor: initial;
 }
+
+@media (max-width: 1007px) {
+  .Card {
+    width: 13rem;
+  }
+}
