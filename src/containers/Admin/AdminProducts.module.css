@@ -1,0 +1,42 @@
+.Container {
+  padding: 0px 0px 50px 0px;
+}
+.Controls {
+  text-align: right;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 30px;
+  background-color: #17a2b8;
+  padding: 0px 0 5px 20px;
+}
+
+.Controls label {
+  margin: 0;
+  padding: 0;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: "Dosis", sans-serif;
+  font-size: 0.8em;
+  letter-spacing: 1.2px;
+  position: relative;
+  top: 1px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+}
+.Controls label:hover .Icon {
+  color: rgb(238, 235, 235);
+}
+.Controls label:hover {
+  color: rgb(238, 235, 235);
+}
+.Icon {
+  color: white;
+  font-size: 1.6em;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  margin-right: 5px;
+  padding: 0;
+}

@@ -2,19 +2,16 @@
   margin: 0 auto;
   padding: 0;
   width: 100%;
-  /* height: 100%; */
-  /* background-color: red; */
   display: flex;
   justify-content: space-between;
+  font-family: "Karla", sans-serif;
 }
 
 .Navbar {
   width: 95%;
   height: 100%;
-  /* background-color: #17a2b8; */
   background-color: rgb(243, 235, 235);
   height: 33px;
-  /* margin-bottom: 40px; */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -36,6 +33,9 @@
   /* height: 100%; */
   /* border-top: 1px solid #94ecfa; */
 }
+.ProductCard {
+  margin-top: 10px;
+}
 .NoProductsFound {
   width: 80%;
   display: flex;
@@ -45,4 +45,28 @@
 .NoProductsFound h3 {
   position: relative;
   bottom: 40px;
+}
+.Type {
+  background-color: white;
+  border: 1px solid rgb(207, 203, 203);
+  padding: 0px 4px 0px 10px;
+  margin: 0 0 20px 30px;
+  width: 125px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px;
+}
+.Type span {
+  color: #6c757d;
+}
+.Icon {
+  color: #6c757d;
+  font-weight: bold;
+  font-size: 1.1em;
+  cursor: pointer;
+}
+.Icon:hover {
+  color: red;
 }

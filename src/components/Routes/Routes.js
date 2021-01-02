@@ -3,11 +3,10 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 import Products from "../../containers/Shop/Products/Products";
-import AddProduct from "../../containers/Admin/AddProduct/AddProduct";
 import ProductDetail from "../../containers/Shop/ProductDetail/ProductDetail";
 import ProductTypes from "../../containers/Shop/ProductTypes/ProductTypes";
 
-import AdminProducts from "../../containers/Admin/AdminProducts/AdminProducts";
+import AdminProducts from "../../containers/Admin/AdminProducts";
 import Login from "../../containers/Auth/Login/Login";
 import Register from "../../containers/Auth/Register/Register";
 import Cart from "../../containers/Shop/Cart/Cart";

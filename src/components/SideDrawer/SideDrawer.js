@@ -6,6 +6,8 @@ import * as actions from "../../store/actions/products";
 
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
 const sideDrawer = (props) => {
   const sideDrawerClasses = [
@@ -16,18 +18,21 @@ const sideDrawer = (props) => {
   if (props.productTypes) {
     types = props.productTypes.map((type) => {
       return (
-        <h6
-          onClick={() => {
-            props.getProductsHandler(type);
-            props.history.push({
-              pathname: "/products",
-              search: "?" + type,
-            });
-          }}
-          key={type}
-        >
-          {type}s
-        </h6>
+        <div>
+          <h6
+            onClick={() => {
+              props.getProductsHandler(type);
+              props.history.push({
+                pathname: "/products",
+                search: "?" + type,
+              });
+            }}
+            key={type}
+          >
+            {type}s
+          </h6>
+          <FontAwesomeIcon icon={faAngleRight} className={classes.Icon} />
+        </div>
       );
     });
   }
@@ -45,7 +50,7 @@ const sideDrawer = (props) => {
           <div className={classes.Category}>{types}</div>
         </Card.Body>
       </Card>
-      {props.children}
+      <div>{props.children}</div>
     </Container>
   );
 };

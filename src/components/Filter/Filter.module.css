@@ -24,11 +24,12 @@
   padding-left: 10px;
 }
 .Container hr {
-  background-color: white;
+  background-color: rgb(199, 197, 197);
   margin: 8px 0 8px 0;
 }
 .Container h6 {
-  color: white;
+  color: rgb(235, 228, 228);
+  font-size: 0.9em;
 }
 
 .Actions {

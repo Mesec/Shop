@@ -21,7 +21,7 @@ const Filter = (props) => {
         <ToggleBtn />
       </div>
       <div className={classes.Container}>
-        <h6>Price</h6>
+        <h6>Filter by Price</h6>
         <hr />
         {props.priceCheckboxes.map((item) => {
           return (

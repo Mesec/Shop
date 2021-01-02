@@ -114,7 +114,7 @@ const ProductDetail = (props) => {
                 </Button>
                 <Button
                   className={classes.GoBackButton}
-                  variant="danger"
+                  variant="secondary"
                   onClick={props.history.goBack}
                 >
                   Go Back

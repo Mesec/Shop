@@ -8,6 +8,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavItem from "react-bootstrap/NavItem";
 import ToggleButton from "../ToggleButton/Toggle";
+import cartIcon from "../../images/shopping-cart.svg";
 
 const Navigation = (props) => {
   const token = localStorage.getItem("token");
@@ -26,13 +27,7 @@ const Navigation = (props) => {
               Products
             </Nav.Link>
           </NavItem>
-          {token ? (
-            <NavItem>
-              <Nav.Link as={NavLink} to="/cart">
-                Cart
-              </Nav.Link>
-            </NavItem>
-          ) : null}
+
           {token ? (
             <NavItem>
               <Nav.Link as={NavLink} to="/orders">
@@ -43,7 +38,14 @@ const Navigation = (props) => {
           {token ? (
             <NavItem>
               <Nav.Link as={NavLink} to="/admin/products">
-                Admin Products
+                Admin
+              </Nav.Link>
+            </NavItem>
+          ) : null}
+          {token ? (
+            <NavItem>
+              <Nav.Link as={NavLink} to="/cart">
+                Cart
               </Nav.Link>
             </NavItem>
           ) : null}

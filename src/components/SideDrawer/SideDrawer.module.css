@@ -58,25 +58,41 @@
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
 .Category {
-  margin-top: 10px;
+  margin-top: 20px;
 }
-.Category h6 {
+.Category div {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+.Category div h6 {
   margin: 0;
   font-weight: normal;
   width: 100%;
-  padding: 7px 0 7px 16px;
+  padding: 7px 0 7px 0px;
   font-weight: normal;
   cursor: pointer;
-  transition: all ease-in 0.2s;
+  transition: all ease 0.2s;
   text-transform: capitalize;
   font-size: 1em;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  margin-bottom: 2px;
+  font-family: "Dosis", sans-serif;
+  font-weight: bold;
+  margin-bottom: 4px;
+  color: rgb(56, 55, 55);
+}
+.Icon {
+  width: 10px;
+  color: rgb(56, 55, 55);
 }
 
-.Category h6:hover {
+.Category div:hover {
   background-color: rgb(231, 226, 226);
 }
+.Category div:hover h6,
+.Category div:hover .Icon {
+  color: #17a2b8;
+}
+
 @media (max-width: 767px) {
   .SideDrawer {
     width: 100%;

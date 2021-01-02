@@ -12,6 +12,16 @@ import Col from "react-bootstrap/Col";
 import classes from "./ProductCart.module.css";
 
 const productCard = (props) => {
+  const imageContainerClasses = [
+    classes.ImageContainer,
+    props.path === "/" || props.history.location.search !== ""
+      ? classes.ImageContainerUser
+      : classes.ImageContainerAdmin,
+  ];
+  const imageClasses =
+    props.path === "/" || props.history.location.search !== ""
+      ? classes.ImageUser
+      : classes.ImageAdmin;
   let card = null;
   if (props.products) {
     card = props.products.map((product) => {
@@ -19,13 +29,17 @@ const productCard = (props) => {
         <Col md="auto" key={product._id} className={classes.Col}>
           <Card className={classes.Card}>
             <div
-              className={classes.ImageContainer}
-              onClick={() => props.click(product._id)}
+              className={imageContainerClasses.join(" ")}
+              onClick={
+                props.path === "/" || props.history.location.search !== ""
+                  ? () => props.click(product._id)
+                  : null
+              }
             >
               <img
                 src={product.image}
                 alt={product.name}
-                className={classes.Image}
+                className={imageClasses}
               />
             </div>
             <div className={classes.CardBody}>
@@ -61,7 +75,7 @@ const productCard = (props) => {
                   <Button
                     size="sm"
                     className={classes.Button}
-                    variant="danger"
+                    variant="secondary"
                     onClick={() => props.delProdShowModalHandler(product)}
                   >
                     Delete
