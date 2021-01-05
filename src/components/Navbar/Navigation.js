@@ -8,14 +8,14 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavItem from "react-bootstrap/NavItem";
 import ToggleButton from "../ToggleButton/Toggle";
-import cartIcon from "../../images/shopping-cart.svg";
 
 const Navigation = (props) => {
   const token = localStorage.getItem("token");
   return (
     <Navbar bg="info" variant="dark" expand="md" className={classes.Navbar}>
-      {/* <ToggleButton /> */}
-
+      <div className={classes.Toggle}>
+        <ToggleButton />
+      </div>
       <Navbar.Brand as={NavLink} to="/" className={classes.Brand}>
         Online-Shop
       </Navbar.Brand>

@@ -10,6 +10,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Spinner from "../../../components/Spinner/Spinner";
+import CommentBar from "../../../components/CommentBar/CommentBar";
 
 const ProductDetail = (props) => {
   useEffect(() => {
@@ -26,8 +27,8 @@ const ProductDetail = (props) => {
   console.log(props.product);
 
   return (
-    <Container className={classes.Container}>
-      <Row>
+    <Container fluid className={classes.Container}>
+      <Row className={classes.Row}>
         {props.loading ? (
           <div className={classes.Spinner}>
             <Spinner />
@@ -61,7 +62,9 @@ const ProductDetail = (props) => {
                         : { color: "black" }
                     }
                   >
-                    IN STOCK: {props.product ? props.product.amount : null}
+                    {props.product && props.product.amount > 0
+                      ? `IN STOCK: ${props.product.amount}`
+                      : "OUT OF STOCK"}
                   </h6>
                   <h6>Price: ${props.product ? props.product.price : null}</h6>
                 </div>
@@ -92,6 +95,7 @@ const ProductDetail = (props) => {
                   </Button>
                 </div>
                 <Button
+                  size="sm"
                   className={classes.ActionButtons}
                   variant="info"
                   disabled={props.product && !props.product.amount}
@@ -113,6 +117,7 @@ const ProductDetail = (props) => {
                   Add to Cart
                 </Button>
                 <Button
+                  size="sm"
                   className={classes.GoBackButton}
                   variant="secondary"
                   onClick={props.history.goBack}
@@ -124,6 +129,7 @@ const ProductDetail = (props) => {
           </Card>
         )}
       </Row>
+      {props.loading ? null : <CommentBar />}
     </Container>
   );
 };

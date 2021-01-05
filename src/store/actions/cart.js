@@ -76,11 +76,9 @@ export const getCartProducts = () => {
 };
 
 //Clear the Cart
-export const clearCartStart = () => {
-  return {
-    type: actionTypes.CLEAR_CART_START,
-  };
-};
+export const clearCartStart = () => ({
+  type: actionTypes.CLEAR_CART_START,
+});
 export const clearCartSuccess = () => {
   return {
     type: actionTypes.CLEAR_CART_SUCCESS,

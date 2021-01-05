@@ -4,9 +4,14 @@
 .Controls {
   background-color: #17a2b8;
 }
+.Wrapper {
+  display: flex;
+  flex-direction: column;
+}
 .Card {
-  margin: 0 auto;
   width: 600px;
+  margin-bottom: 40px;
+  margin: 0 auto;
 }
 .ImageContainer {
   width: 100%;
@@ -36,14 +41,14 @@
 }
 .RightSide p {
   font-size: 0.9em;
+  font-family: "Karla", sans-serif;
 }
 .ID {
   font-size: 0.8em;
   margin: 0;
+  font-family: "Karla", sans-serif;
 }
-.AddToCartActions h4 {
-  margin-bottom: 20px;
-}
+
 .AddToCartActions {
   display: flex;
   align-items: center;
@@ -75,6 +80,7 @@ input::-webkit-inner-spin-button {
   font-size: 0.6em;
   border: 1px solid #ccc;
   margin-bottom: 1px;
+  font-family: "Karla", sans-serif;
 }
 .ActionButtons:disabled {
   cursor: not-allowed;
@@ -89,4 +95,14 @@ input::-webkit-inner-spin-button {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.Row {
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+@media (max-width: 635px) {
+  .Card {
+    width: 100%;
+  }
 }

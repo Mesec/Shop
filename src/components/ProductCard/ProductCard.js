@@ -26,7 +26,7 @@ const productCard = (props) => {
   if (props.products) {
     card = props.products.map((product) => {
       return (
-        <Col md="auto" key={product._id} className={classes.Col}>
+        <Col md="auto" sm="auto" key={product._id} className={classes.Col}>
           <Card className={classes.Card}>
             <div
               className={imageContainerClasses.join(" ")}

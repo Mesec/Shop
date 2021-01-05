@@ -1,0 +1,110 @@
+.CommentBar {
+  padding-top: 10px;
+  font-family: "Karla", sans-serif;
+  width: 100%;
+}
+.Header {
+  margin-bottom: 15px;
+}
+.AddComment {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.AddComment input {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  padding: 0;
+  height: 30px;
+  width: 100%;
+  font-size: 0.9em;
+}
+.AddComment input:focus {
+  outline: none;
+  border-color: black;
+}
+.InputActions {
+  display: flex;
+}
+.ButtonContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+.AddComment img {
+  margin-right: 20px;
+}
+.CommentContainer {
+  margin-left: 17px;
+  position: relative;
+  top: 3px;
+}
+.UserInfo {
+  font-size: 0.8em;
+  margin: 0;
+  padding: 0;
+}
+.UserInfo p:nth-child(1) {
+  font-weight: 600;
+  margin-right: 10px;
+  text-transform: uppercase;
+}
+.UserInfo p:nth-child(2) {
+  font-weight: bold;
+  color: gray;
+  font-size: 0.85em;
+  position: relative;
+  top: 3px;
+}
+.Comment {
+  margin: 0;
+  padding: 0;
+}
+.Comment p {
+  font-size: 0.94em;
+}
+
+.UserImage {
+  width: 50px;
+  height: 50px;
+}
+.CommentControls {
+  margin-left: 65px;
+  margin-top: 0px;
+  width: 130px;
+  display: flex;
+  justify-content: space-between;
+}
+.CommentControls button {
+  position: relative;
+  left: 10px;
+  bottom: 7px;
+  background-color: transparent;
+  color: black;
+  border: none;
+  font-weight: 500;
+}
+.CommentControls button:hover {
+  color: #17a2b8;
+  background-color: transparent;
+  border: none;
+}
+.Like,
+.Unlike {
+  cursor: pointer;
+}
+.Like:hover {
+  color: #17a2b8;
+}
+.Unlike:hover {
+  color: rgb(187, 43, 43);
+}
+@media (max-width: 770px) {
+  .UserImage {
+    display: none;
+  }
+  .CommentControls {
+    margin-left: 0;
+  }
+  .Header {
+  }
+}

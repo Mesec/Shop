@@ -50,7 +50,7 @@ const sideDrawer = (props) => {
           <div className={classes.Category}>{types}</div>
         </Card.Body>
       </Card>
-      <div>{props.children}</div>
+      <div>{types}</div>
     </Container>
   );
 };
